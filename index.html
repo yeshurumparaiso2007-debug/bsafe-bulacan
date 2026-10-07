@@ -52,19 +52,29 @@
     <header class="bg-brand-900 text-white sticky top-0 z-40 shadow-md">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
             
-            <!-- LOGO & TITLE -->
-            <div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-                <div class="bg-brand-500 p-2 rounded-lg text-white font-bold text-xl flex items-center justify-center">
-                    <i data-lucide="shield-alert" class="w-6 h-6"></i>
-                </div>
-                <div>
-                    <div class="font-extrabold text-lg tracking-wider flex items-center gap-1.5">
-                        BSAFE <span class="bg-brand-700 text-brand-100 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-normal">Bulacan</span>
-                    </div>
-                    <p class="text-[10px] text-brand-100 hidden sm:block">Safety & Flood Emergency Web Portal</p>
-                </div>
-            </div>
+             <!-- BSAFE LOGO BRANDING (NOAH CONVERTED) -->
+<div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
+    <div class="flex items-center gap-3">
+        <!-- CUSTOM VECTOR GRAPHIC LOGO MARK (ADAPTED FROM NOAH WAVE EMBLEM) -->
+        <svg class="h-9 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Dynamic Blue Wave Ribbon (BSAFE Monogram Wave) -->
+            <path d="M 10 38 Q 25 10 40 38 T 70 38 Q 85 10 100 38 T 130 38" stroke="#0284c7" stroke-width="9" stroke-linecap="round" fill="none"/>
+            <path d="M 10 20 L 10 45 M 25 20 A 8 8 0 0 1 25 35 L 10 35 L 25 50" stroke="#0f172a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+            <!-- Monogram Letters: B S A F E -->
+            <text x="38" y="44" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="900" font-size="32" letter-spacing="-1">BSAFE</text>
+        </svg>
 
+        <!-- NOAH TYPEFACE COMPACT BRAND TEXT CONVERSION -->
+        <div class="flex flex-col leading-none tracking-tight">
+            <span class="text-sky-500 font-extrabold text-lg sm:text-xl tracking-wider uppercase font-sans">
+                BULACAN SAFETY &amp;
+            </span>
+            <span class="text-sky-400 font-extrabold text-sm sm:text-base tracking-widest uppercase font-sans">
+                FLOOD EMERGENCY WEB PORTAL
+            </span>
+        </div>
+    </div>
+</div>
             <!-- DESKTOP NAVIGATION -->
             <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
                 <button onclick="switchTab('home')" class="nav-btn px-3 py-2 rounded-md hover:bg-brand-700 transition" id="nav-home">Home</button>
@@ -1364,29 +1374,6 @@
             alert("Report submitted successfully for moderation verification.");
             e.target.reset();
         }
-        <!-- BSAFE LOGO BRANDING (NOAH CONVERTED) -->
-<div class="flex items-center space-x-3 cursor-pointer" onclick="switchTab('home')">
-    <div class="flex items-center gap-3">
-        <!-- CUSTOM VECTOR GRAPHIC LOGO MARK (ADAPTED FROM NOAH WAVE EMBLEM) -->
-        <svg class="h-9 w-auto" viewBox="0 0 200 60" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <!-- Dynamic Blue Wave Ribbon (BSAFE Monogram Wave) -->
-            <path d="M 10 38 Q 25 10 40 38 T 70 38 Q 85 10 100 38 T 130 38" stroke="#0284c7" stroke-width="9" stroke-linecap="round" fill="none"/>
-            <path d="M 10 20 L 10 45 M 25 20 A 8 8 0 0 1 25 35 L 10 35 L 25 50" stroke="#0f172a" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-            <!-- Monogram Letters: B S A F E -->
-            <text x="38" y="44" fill="#0f172a" font-family="system-ui, sans-serif" font-weight="900" font-size="32" letter-spacing="-1">BSAFE</text>
-        </svg>
-
-        <!-- NOAH TYPEFACE COMPACT BRAND TEXT CONVERSION -->
-        <div class="flex flex-col leading-none tracking-tight">
-            <span class="text-sky-500 font-extrabold text-lg sm:text-xl tracking-wider uppercase font-sans">
-                BULACAN SAFETY &amp;
-            </span>
-            <span class="text-sky-400 font-extrabold text-sm sm:text-base tracking-widest uppercase font-sans">
-                FLOOD EMERGENCY WEB PORTAL
-            </span>
-        </div>
-    </div>
-</div>
     </script>
 </body>
 </html>
