@@ -49,6 +49,19 @@
         .map-region { transition: all 0.25s ease-in-out; cursor: pointer; }
         .map-region:hover path { filter: brightness(1.15); transform: scale(1.01); transform-origin: center; }
         .map-region.active path { stroke: #ffffff; stroke-width: 4px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
+        
+        /* Highlight user region on map */
+        .map-region.user-located path {
+            stroke: #38bdf8 !important;
+            stroke-width: 5px !important;
+            animation: userPulse 2s infinite;
+        }
+
+        @keyframes userPulse {
+            0% { filter: drop-shadow(0 0 4px #0284c7); }
+            50% { filter: drop-shadow(0 0 12px #38bdf8); }
+            100% { filter: drop-shadow(0 0 4px #0284c7); }
+        }
 
         /* Subtle Ambient Water Wave Motion */
         @keyframes waveMotion {
@@ -79,6 +92,31 @@
     </script>
 </head>
 <body class="bg-slate-50 dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col pb-16 md:pb-0 relative transition-colors duration-200">
+
+    <!-- LOCATION MODAL ON ENTRY -->
+    <div id="location-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm transition-opacity duration-300">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-6 max-w-md w-full shadow-2xl space-y-5 text-center relative overflow-hidden">
+            <div class="w-16 h-16 bg-sky-100 dark:bg-sky-950/80 text-brand-600 dark:text-sky-400 rounded-full flex items-center justify-center mx-auto shadow-inner">
+                <i data-lucide="map-pin-line" class="w-8 h-8 animate-bounce"></i>
+            </div>
+            
+            <div class="space-y-2">
+                <h2 class="text-xl font-black text-slate-900 dark:text-slate-100">Welcome to BSAFE Portal</h2>
+                <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
+                    To deliver accurate live flood hazard levels, evacuation centers, and local advisories, BSAFE requests access to your device location.
+                </p>
+            </div>
+
+            <div class="flex flex-col gap-2 pt-2">
+                <button onclick="requestUserLocation()" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-3 rounded-xl text-xs flex items-center justify-center gap-2 shadow-lg hover:scale-[1.02] active:scale-98 transition">
+                    <i data-lucide="crosshair" class="w-4 h-4"></i> Allow Location Access
+                </button>
+                <button onclick="dismissLocationModal()" class="w-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 font-semibold py-2.5 rounded-xl text-xs transition">
+                    Continue with Default (Malolos Capital)
+                </button>
+            </div>
+        </div>
+    </div>
 
     <!-- FLOATING TOAST NOTIFICATION CONTAINER -->
     <div id="toast" class="fixed bottom-5 right-5 z-50 bg-slate-900 dark:bg-slate-800 text-white px-4 py-3 rounded-xl shadow-2xl border border-slate-700 flex items-center gap-3 text-xs hide">
@@ -123,6 +161,12 @@
 
             <!-- RIGHT ACTION BUTTONS -->
             <div class="flex items-center space-x-2">
+                <!-- USER LOCATION BADGE IN HEADER -->
+                <div id="header-user-badge" onclick="requestUserLocation()" class="hidden sm:flex items-center gap-1.5 bg-brand-800 dark:bg-slate-800 hover:bg-brand-700 dark:hover:bg-slate-700 text-sky-200 dark:text-sky-300 px-2.5 py-1.5 rounded-lg text-xs font-mono border border-brand-700 dark:border-slate-700 cursor-pointer transition">
+                    <i data-lucide="navigation" class="w-3.5 h-3.5 text-sky-400 animate-pulse"></i>
+                    <span id="user-location-text">Locating...</span>
+                </div>
+
                 <button id="theme-toggle" onclick="toggleDarkMode()" class="p-2 rounded-lg bg-brand-800 dark:bg-slate-800 hover:bg-brand-700 dark:hover:bg-slate-700 text-amber-300 dark:text-sky-300 transition focus:outline-none" title="Toggle Light/Dark Mode">
                     <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
                 </button>
@@ -154,6 +198,25 @@
 
         <!-- 1. HOME / DASHBOARD TAB -->
         <section id="tab-home" class="tab-content active space-y-6">
+            <!-- USER DETECTED LOCATION HIGHLIGHT BANNER -->
+            <div id="user-location-banner" class="hidden bg-sky-900/90 dark:bg-slate-900 text-white rounded-xl p-4 shadow-md border-l-8 border-sky-400 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                <div class="flex items-center gap-3">
+                    <div class="p-2.5 bg-sky-500/20 rounded-xl text-sky-300">
+                        <i data-lucide="navigation-2" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <span class="bg-sky-400 text-slate-900 text-[10px] font-extrabold px-2 py-0.2 rounded uppercase tracking-wider">Your Detected Location</span>
+                            <span class="text-xs text-sky-200 font-mono" id="user-coord-text">--</span>
+                        </div>
+                        <h3 class="text-lg font-black text-white" id="user-muni-title">Malolos, Bulacan</h3>
+                    </div>
+                </div>
+                <button onclick="switchTab('map')" class="bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold px-3.5 py-2 rounded-lg text-xs flex items-center gap-1.5 transition">
+                    <i data-lucide="map-pin" class="w-4 h-4"></i> View Your Zone Hazard
+                </button>
+            </div>
+
             <!-- EMERGENCY STATUS BANNER -->
             <div class="bg-red-600 dark:bg-red-700 text-white rounded-xl p-5 shadow-lg relative overflow-hidden border-l-8 border-red-900">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
@@ -255,10 +318,13 @@
                     </button>
                 </div>
 
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div onclick="selectMunicipality('Calumpit'); switchTab('map')" class="border-l-4 border-red-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-red-50/50 dark:hover:bg-slate-800 transition">
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4" id="muni-cards-grid">
+                    <div id="card-Calumpit" onclick="selectMunicipality('Calumpit'); switchTab('map')" class="muni-card border-l-4 border-red-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-red-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Calumpit</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.8 - 1.2 m</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Poblacion, Gatbuca, Meysulao</p>
@@ -266,9 +332,12 @@
                         <span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 text-[10px] font-bold px-2 py-0.5 rounded">Critical</span>
                     </div>
 
-                    <div onclick="selectMunicipality('Hagonoy'); switchTab('map')" class="border-l-4 border-red-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-red-50/50 dark:hover:bg-slate-800 transition">
+                    <div id="card-Hagonoy" onclick="selectMunicipality('Hagonoy'); switchTab('map')" class="muni-card border-l-4 border-red-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-red-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Hagonoy</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.6 - 1.0 m</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: San Jose, Sto. Niño, Mercader</p>
@@ -276,9 +345,12 @@
                         <span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 text-[10px] font-bold px-2 py-0.5 rounded">Critical</span>
                     </div>
 
-                    <div onclick="selectMunicipality('Malolos'); switchTab('map')" class="border-l-4 border-amber-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-amber-50/50 dark:hover:bg-slate-800 transition">
+                    <div id="card-Malolos" onclick="selectMunicipality('Malolos'); switchTab('map')" class="muni-card border-l-4 border-amber-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-amber-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Malolos (Capital)</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.2 - 0.5 m</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Cofradia, Canalate, San Vicente</p>
@@ -286,9 +358,12 @@
                         <span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">Warning</span>
                     </div>
 
-                    <div onclick="selectMunicipality('Bocaue'); switchTab('map')" class="border-l-4 border-amber-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-amber-50/50 dark:hover:bg-slate-800 transition">
+                    <div id="card-Bocaue" onclick="selectMunicipality('Bocaue'); switchTab('map')" class="muni-card border-l-4 border-amber-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-amber-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Bocaue</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.3 - 0.6 m</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Wakas, Igulot, Lolomboy</p>
@@ -296,9 +371,12 @@
                         <span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">Warning</span>
                     </div>
 
-                    <div onclick="selectMunicipality('Guiguinto'); switchTab('map')" class="border-l-4 border-yellow-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-yellow-50/50 dark:hover:bg-slate-800 transition">
+                    <div id="card-Guiguinto" onclick="selectMunicipality('Guiguinto'); switchTab('map')" class="muni-card border-l-4 border-yellow-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-yellow-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider">Monitor</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider">Monitor</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Guiguinto</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.1 - 0.3 m</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Santa Cruz, Tabang</p>
@@ -306,9 +384,12 @@
                         <span class="bg-yellow-100 dark:bg-yellow-950 text-yellow-800 dark:text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded">Monitor</span>
                     </div>
 
-                    <div onclick="selectMunicipality('Balagtas'); switchTab('map')" class="border-l-4 border-emerald-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-emerald-50/50 dark:hover:bg-slate-800 transition">
+                    <div id="card-Balagtas" onclick="selectMunicipality('Balagtas'); switchTab('map')" class="muni-card border-l-4 border-emerald-500 bg-slate-50 dark:bg-slate-800/60 p-3.5 rounded-r-lg flex justify-between items-start cursor-pointer hover:bg-emerald-50/50 dark:hover:bg-slate-800 transition relative">
                         <div>
-                            <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Normal</span>
+                            <div class="flex items-center gap-2">
+                                <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Normal</span>
+                                <span class="user-here-pill hidden bg-sky-500 text-slate-950 font-black text-[9px] px-1.5 py-0.2 rounded-full">YOUR LOCATION</span>
+                            </div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Balagtas</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">Passable</span></p>
                             <p class="text-[11px] text-slate-500 dark:text-slate-300">Minimal gutter-deep water in low spots</p>
@@ -418,9 +499,9 @@
                                 <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
                                 LIVE TELEMETRY SYNC
                             </div>
-                            <button onclick="locateUser()" class="bg-brand-600 hover:bg-brand-500 text-white p-2 rounded-lg text-xs font-bold flex items-center gap-1 shadow active:scale-95 transition">
+                            <button onclick="requestUserLocation()" class="bg-brand-600 hover:bg-brand-500 text-white p-2 rounded-lg text-xs font-bold flex items-center gap-1 shadow active:scale-95 transition">
                                 <i data-lucide="crosshair" class="w-4 h-4"></i>
-                                <span class="hidden sm:inline">My Location</span>
+                                <span class="hidden sm:inline">Re-detect GPS Location</span>
                             </button>
                         </div>
 
@@ -434,7 +515,7 @@
                                 <text x="250" y="475" fill="#38bdf8" font-size="12" font-weight="bold">MANILA BAY / PAMPANGA DELTA</text>
 
                                 <!-- CALUMPIT -->
-                                <g id="region-Calumpit" onclick="selectMunicipality('Calumpit')" class="map-region active">
+                                <g id="region-Calumpit" onclick="selectMunicipality('Calumpit')" class="map-region">
                                     <path d="M 120,80 L 260,70 L 290,160 L 190,220 L 100,160 Z" fill="#ef4444" opacity="0.85" stroke="#ffffff" stroke-width="2"/>
                                     <text x="180" y="140" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">CALUMPIT</text>
                                     <text x="180" y="160" fill="#fef2f2" font-size="11" text-anchor="middle">Depth: 0.8-1.2m</text>
@@ -448,7 +529,7 @@
                                 </g>
 
                                 <!-- MALOLOS -->
-                                <g id="region-Malolos" onclick="selectMunicipality('Malolos')" class="map-region">
+                                <g id="region-Malolos" onclick="selectMunicipality('Malolos')" class="map-region active">
                                     <path d="M 200,225 L 340,180 L 390,300 L 300,370 L 175,370 Z" fill="#f97316" opacity="0.85" stroke="#ffffff" stroke-width="2"/>
                                     <text x="280" y="275" fill="#ffffff" font-size="16" font-weight="bold" text-anchor="middle">MALOLOS</text>
                                     <text x="280" y="295" fill="#fff7ed" font-size="11" text-anchor="middle">Depth: 0.2-0.5m</text>
@@ -484,7 +565,7 @@
                                 loading="lazy" 
                                 allowfullscreen 
                                 referrerpolicy="no-referrer-when-downgrade"
-                                src="https://maps.google.com/maps?q=Calumpit,+Bulacan&t=&z=12&ie=UTF8&iwloc=&output=embed">
+                                src="https://maps.google.com/maps?q=Malolos,+Bulacan&t=&z=13&ie=UTF8&iwloc=&output=embed">
                             </iframe>
                         </div>
 
@@ -502,29 +583,32 @@
 
                     <div class="lg:col-span-4 bg-slate-50 dark:bg-slate-800/50 rounded-xl p-5 border border-slate-200 dark:border-slate-800 space-y-4">
                         <div class="border-b pb-3 border-slate-200 dark:border-slate-700">
-                            <span class="text-[10px] font-bold text-brand-600 dark:text-sky-400 uppercase tracking-widest">Selected Territory</span>
-                            <h3 id="panel-name" class="text-2xl font-black text-slate-900 dark:text-slate-100">Calumpit</h3>
-                            <span id="panel-status-badge" class="inline-block mt-1 bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300 text-xs font-bold px-2.5 py-0.5 rounded-full">
-                                Severe Flooding (Critical)
+                            <div class="flex justify-between items-center">
+                                <span class="text-[10px] font-bold text-brand-600 dark:text-sky-400 uppercase tracking-widest">Selected Territory</span>
+                                <span id="map-user-pill" class="hidden bg-sky-500 text-slate-950 font-black text-[9px] px-2 py-0.5 rounded-full">YOUR LOCATION</span>
+                            </div>
+                            <h3 id="panel-name" class="text-2xl font-black text-slate-900 dark:text-slate-100">Malolos (Capital)</h3>
+                            <span id="panel-status-badge" class="inline-block mt-1 bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 text-xs font-bold px-2.5 py-0.5 rounded-full">
+                                Flooding (Warning)
                             </span>
                         </div>
 
                         <div class="space-y-3 text-xs">
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
                                 <span class="text-slate-500 dark:text-slate-300">Est. Water Depth:</span>
-                                <span id="panel-depth" class="font-bold text-slate-800 dark:text-slate-100">0.8 m – 1.2 m</span>
+                                <span id="panel-depth" class="font-bold text-slate-800 dark:text-slate-100">0.2 m – 0.5 m</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
                                 <span class="text-slate-500 dark:text-slate-300">Rainfall Condition:</span>
-                                <span id="panel-rainfall" class="font-bold text-slate-800 dark:text-slate-100">Heavy Downpour (32mm/h)</span>
+                                <span id="panel-rainfall" class="font-bold text-slate-800 dark:text-slate-100">Moderate Rain (15mm/h)</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
                                 <span class="text-slate-500 dark:text-slate-300">High Tide Status:</span>
-                                <span id="panel-tide" class="font-bold text-red-600 dark:text-red-400">Rising (1.4m Peak at 5PM)</span>
+                                <span id="panel-tide" class="font-bold text-amber-600 dark:text-amber-400">Moderate Impact</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
                                 <span class="text-slate-500 dark:text-slate-300">Evacuation Centers:</span>
-                                <span id="panel-evac" class="font-bold text-emerald-600 dark:text-emerald-400">4 Active / Open</span>
+                                <span id="panel-evac" class="font-bold text-emerald-600 dark:text-emerald-400">3 Standby</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
                                 <span class="text-slate-500 dark:text-slate-300">Last Verified Update:</span>
@@ -537,11 +621,11 @@
                                 <i data-lucide="alert-triangle" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i> Recommended Action:
                             </h4>
                             <p id="panel-action" class="text-xs text-amber-800 dark:text-amber-200">
-                                Avoid unnecessary travel. Prepare Go-Bag and move electrical appliances to higher floors. Standby for forced evacuation orders.
+                                Monitor local barangay advisories. Keep emergency contacts ready.
                             </p>
                         </div>
 
-                        <a id="panel-gmap-btn" href="https://www.google.com/maps/search/Calumpit+Bulacan" target="_blank" class="w-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600 text-white font-bold py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 transition shadow">
+                        <a id="panel-gmap-btn" href="https://www.google.com/maps/search/Malolos+Bulacan" target="_blank" class="w-full bg-brand-600 hover:bg-brand-700 dark:bg-brand-500 dark:hover:bg-brand-600 text-white font-bold py-2.5 rounded-lg text-xs flex items-center justify-center gap-2 transition shadow">
                             <i data-lucide="external-link" class="w-4 h-4"></i> Open in Google Maps
                         </a>
                     </div>
@@ -560,7 +644,7 @@
                         </h2>
                         <p class="text-xs text-slate-500 dark:text-slate-300">Real-time radar metrics synced with PAGASA Monitoring</p>
                     </div>
-                    <span class="text-xs text-slate-400 dark:text-slate-300 font-mono">Station: Malolos Radar</span>
+                    <span class="text-xs text-slate-400 dark:text-slate-300 font-mono" id="weather-station-label">Station: Malolos Radar</span>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -1432,6 +1516,116 @@
         // Initialize Lucide Icons
         lucide.createIcons();
 
+        // GEOLOCATION & GEOPROXIMITY SYSTEM
+        const targetCoords = [
+            { name: 'Calumpit', lat: 14.9167, lng: 120.7667 },
+            { name: 'Hagonoy', lat: 14.8333, lng: 120.7333 },
+            { name: 'Malolos', lat: 14.8433, lng: 120.8114 },
+            { name: 'Guiguinto', lat: 14.8333, lng: 120.8833 },
+            { name: 'Balagtas', lat: 14.8167, lng: 120.9000 },
+            { name: 'Bocaue', lat: 14.7972, lng: 120.9256 }
+        ];
+
+        let currentDetectedMuni = 'Malolos';
+
+        // Haversine formula for distance calculation (in kilometers)
+        function getDistanceKm(lat1, lon1, lat2, lon2) {
+            const R = 6371;
+            const dLat = (lat2 - lat1) * Math.PI / 180;
+            const dLon = (lon2 - lon1) * Math.PI / 180;
+            const a = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+                      Math.cos(lat1 * Math.PI / 180) * Math.cos(lat2 * Math.PI / 180) *
+                      Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+            return R * c;
+        }
+
+        function findNearestMunicipality(lat, lng) {
+            let nearest = targetCoords[0];
+            let minDistance = Infinity;
+
+            targetCoords.forEach(loc => {
+                const dist = getDistanceKm(lat, lng, loc.lat, loc.lng);
+                if (dist < minDistance) {
+                    minDistance = dist;
+                    nearest = loc;
+                }
+            });
+
+            return nearest.name;
+        }
+
+        function requestUserLocation() {
+            dismissLocationModal();
+            if ("geolocation" in navigator) {
+                showToast("Acquiring GPS location...");
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const lat = position.coords.latitude;
+                        const lng = position.coords.longitude;
+                        const detected = findNearestMunicipality(lat, lng);
+                        applyUserLocation(detected, lat, lng);
+                        showToast(`Location synced: ${detected}, Bulacan.`);
+                    },
+                    (error) => {
+                        showToast("Location access denied or unavailable. Set to Malolos.");
+                        applyUserLocation('Malolos', 14.8433, 120.8114);
+                    },
+                    { timeout: 10000, enableHighAccuracy: true }
+                );
+            } else {
+                showToast("Geolocation not supported. Defaulting to Malolos.");
+                applyUserLocation('Malolos', 14.8433, 120.8114);
+            }
+        }
+
+        function dismissLocationModal() {
+            const modal = document.getElementById('location-modal');
+            modal.classList.add('opacity-0', 'pointer-events-none');
+            setTimeout(() => { modal.style.display = 'none'; }, 300);
+        }
+
+        function applyUserLocation(muniName, lat, lng) {
+            currentDetectedMuni = muniName;
+
+            // 1. Update Header Badge
+            const headerBadge = document.getElementById('header-user-badge');
+            const headerText = document.getElementById('user-location-text');
+            headerBadge.classList.remove('hidden');
+            headerText.innerText = muniName;
+
+            // 2. Update Home Location Banner
+            const banner = document.getElementById('user-location-banner');
+            banner.classList.remove('hidden');
+            document.getElementById('user-muni-title').innerText = `${muniName}, Bulacan Zone`;
+            document.getElementById('user-coord-text').innerText = lat ? `${lat.toFixed(4)}°N, ${lng.toFixed(4)}°E` : 'GPS Verified';
+
+            // 3. Highlight Location Card in Home Grid
+            document.querySelectorAll('.muni-card').forEach(card => {
+                card.classList.remove('ring-2', 'ring-sky-400', 'bg-sky-50/50', 'dark:bg-slate-800');
+                card.querySelector('.user-here-pill').classList.add('hidden');
+            });
+
+            const targetCard = document.getElementById('card-' + muniName);
+            if (targetCard) {
+                targetCard.classList.add('ring-2', 'ring-sky-400', 'bg-sky-50/50', 'dark:bg-slate-800');
+                targetCard.querySelector('.user-here-pill').classList.remove('hidden');
+            }
+
+            // 4. Highlight Map Region
+            document.querySelectorAll('.map-region').forEach(reg => reg.classList.remove('user-located'));
+            const mapRegion = document.getElementById('region-' + muniName);
+            if (mapRegion) {
+                mapRegion.classList.add('user-located');
+            }
+
+            // 5. Select on Hazard Panel
+            selectMunicipality(muniName);
+
+            // 6. Update Weather Station Header
+            document.getElementById('weather-station-label').innerText = `Station: ${muniName} Radar`;
+        }
+
         // DARK MODE TOGGLE CONTROLLER
         function toggleDarkMode() {
             const isDark = document.documentElement.classList.toggle('dark');
@@ -1591,6 +1785,14 @@
             const regionElem = document.getElementById('region-' + name);
             if (regionElem) regionElem.classList.add('active');
 
+            // User Pill inside map panel
+            const mapUserPill = document.getElementById('map-user-pill');
+            if (name === currentDetectedMuni) {
+                mapUserPill.classList.remove('hidden');
+            } else {
+                mapUserPill.classList.add('hidden');
+            }
+
             document.getElementById('panel-name').innerText = name;
             document.getElementById('panel-status-badge').innerText = data.status;
             document.getElementById('panel-status-badge').className = `inline-block mt-1 text-xs font-bold px-2.5 py-0.5 rounded-full ${data.badgeClass}`;
@@ -1606,12 +1808,6 @@
             
             const btn = document.getElementById('panel-gmap-btn');
             btn.href = data.gmapDirect;
-        }
-
-        function locateUser() {
-            showToast("GPS Signal acquired: Malolos, Bulacan.");
-            toggleMapMode('google');
-            selectMunicipality('Malolos');
         }
 
         function updateGoBag() {
