@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSAFE - Bulacan Safety and Flood Emergency Web Portal</title>
+    <!-- Tailwind CSS with Dark Mode -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            50: '#f0fdf4',
+                            100: '#dcfce7',
+                            500: '#22c55e',
+                            600: '#16a34a',
+                            700: '#15803d',
+                            800: '#166534',
+                            900: '#14532d',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Chart.js for Disaster Telemetry -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: rgba(156, 163, 175, 0.4); border-radius: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(156, 163, 175, 0.7); }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-900 dark:bg-slate-950 dark:text-slate-100 min-h-screen flex flex-col transition-colors duration-200">
+
+    <!-- Top Global Announcement Bar -->
+    <div class="bg-red-600 text-white text-xs sm:text-sm font-semibold py-2 px-4 flex justify-between items-center z-50">
+        <div class="flex items-center gap-2 overflow-hidden">
+            <span class="inline-block w-2.5 h-2.5 bg-white rounded-full animate-ping shrink-0"></span>
+            <span class="truncate">RED RAINFALL WARNING: Severe flooding reported in Calumpit, Hagonoy, and Malolos. Evacuation urged for low-lying areas.</span>
+        </div>
+        <a href="#hotlines" class="underline text-xs shrink-0 hover:text-red-100 ml-4 font-bold">Hotlines</a>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="sticky top-0 bg-white/90 dark:bg-slate-900/90 backdrop-blur-md border-b border-slate-200 dark:border-slate-800 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo & Portal Branding -->
+                <div class="flex items-center gap-3 cursor-pointer" onclick="switchTab('dashboard')">
+                    <div class="p-2 bg-gradient-to-tr from-sky-600 to-blue-700 text-white rounded-xl shadow-md">
+                        <i data-lucide="shield-alert" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-extrabold text-lg sm:text-xl tracking-tight text-slate-900 dark:text-white leading-none">
+                            BSAFE <span class="text-sky-600 dark:text-sky-400 font-normal text-xs sm:text-sm block sm:inline sm:ml-1">Bulacan Safety & Emergency</span>
+                        </h1>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation Tabs -->
+                <nav class="hidden lg:flex items-center space-x-1 text-sm font-medium">
+                    <button onclick="switchTab('dashboard')" id="nav-dashboard" class="nav-btn px-3 py-2 rounded-lg transition-colors text-sky-600 dark:text-sky-400 bg-sky-50 dark:bg-sky-950/50">Dashboard</button>
+                    <button onclick="switchTab('hazard-map')" id="nav-hazard-map" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Hazard Map</button>
+                    <button onclick="switchTab('weather')" id="nav-weather" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Weather Radar</button>
+                    <button onclick="switchTab('analytics')" id="nav-analytics" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Telemetry</button>
+                    <button onclick="switchTab('suspensions')" id="nav-suspensions" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Suspensions</button>
+                    <button onclick="switchTab('preparedness')" id="nav-preparedness" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Go-Bag Tracker</button>
+                    <button onclick="switchTab('evacuation')" id="nav-evacuation" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Evacuation</button>
+                    <button onclick="switchTab('ngo')" id="nav-ngo" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Relief Partners</button>
+                    <button onclick="switchTab('reports')" id="nav-reports" class="nav-btn px-3 py-2 rounded-lg transition-colors text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800">Citizen Feed</button>
+                </nav>
+
+                <!-- Action Controls: Dark Mode Toggle & Emergency Call -->
+                <div class="flex items-center gap-2">
+                    <button id="themeToggle" onclick="toggleDarkMode()" class="p-2.5 rounded-lg border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors" title="Toggle Theme">
+                        <i data-lucide="moon" id="themeIconDark" class="w-5 h-5 hidden dark:block"></i>
+                        <i data-lucide="sun" id="themeIconLight" class="w-5 h-5 block dark:hidden"></i>
+                    </button>
+                    <button onclick="switchTab('hotlines')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg text-sm font-semibold flex items-center gap-1.5 shadow-sm transition-colors">
+                        <i data-lucide="phone-call" class="w-4 h-4"></i>
+                        <span class="hidden sm:inline">Hotlines</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="flex-grow max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        
+        <!-- ==================== TAB 1: DASHBOARD ==================== -->
+        <div id="tab-dashboard" class="tab-content space-y-6">
+            <!-- Key Alert Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 p-4 rounded-xl flex items-start gap-3">
+                    <div class="p-2.5 bg-red-600 text-white rounded-lg shrink-0">
+                        <i data-lucide="cloud-lightning" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Typhoon Signal No. 3</h2>
+                        <p class="font-bold text-slate-900 dark:text-white">Typhoon 'Karding' Proximity</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Sustained winds of 140 km/h. High river inundation risk in Pampanga Delta.</p>
+                    </div>
+                </div>
+
+                <div class="bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-800/60 p-4 rounded-xl flex items-start gap-3">
+                    <div class="p-2.5 bg-amber-500 text-white rounded-lg shrink-0">
+                        <i data-lucide="waves" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Bustos Dam Discharge</h2>
+                        <p class="font-bold text-slate-900 dark:text-white">Spillway Gates Open (3 Gates)</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Water release at 450 m³/s. Low-lying towns along Angat river on code ORANGE.</p>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 dark:bg-blue-950/40 border border-blue-200 dark:border-blue-800/60 p-4 rounded-xl flex items-start gap-3">
+                    <div class="p-2.5 bg-blue-600 text-white rounded-lg shrink-0">
+                        <i data-lucide="users" class="w-6 h-6"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider">Active Shelters</h2>
+                        <p class="font-bold text-slate-900 dark:text-white">42 Centers Operational</p>
+                        <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">1,840 families (7,360 individuals) currently accommodated across Bulacan.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ==================== HIGHLIGHT: 24-HOUR PRECIPITATION FORECAST WITH DARK MODE FIXES ==================== -->
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="cloud-rain" class="w-5 h-5 text-sky-500"></i>
+                        <h3 class="font-bold text-slate-900 dark:text-white text-base">24-Hour High-Resolution Precipitation Forecast</h3>
+                    </div>
+                    <span class="text-xs bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 px-2.5 py-1 rounded-full font-medium">Updated 10 mins ago</span>
+                </div>
+
+                <!-- High-Contrast Dark Mode Fixed Grid -->
+                <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+                    <!-- Forecast Card 1 (NOW) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">NOW</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="cloud-lightning" class="w-7 h-7 text-amber-500 dark:text-amber-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Heavy Torrential</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">32 mm/h</span>
+                    </div>
+
+                    <!-- Forecast Card 2 (3 PM) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">3:00 PM</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="cloud-rain" class="w-7 h-7 text-sky-600 dark:text-sky-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Moderate Rain</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">18 mm/h</span>
+                    </div>
+
+                    <!-- Forecast Card 3 (6 PM) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">6:00 PM</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="cloud-rain" class="w-7 h-7 text-sky-600 dark:text-sky-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Moderate Rain</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">14 mm/h</span>
+                    </div>
+
+                    <!-- Forecast Card 4 (9 PM) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">9:00 PM</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="cloud-drizzle" class="w-7 h-7 text-sky-500 dark:text-sky-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Light Showers</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">5 mm/h</span>
+                    </div>
+
+                    <!-- Forecast Card 5 (12 AM) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">12:00 AM</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="cloud" class="w-7 h-7 text-slate-400 dark:text-slate-300"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Cloudy</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">1 mm/h</span>
+                    </div>
+
+                    <!-- Forecast Card 6 (6 AM) -->
+                    <div class="bg-sky-50 dark:bg-sky-950/70 border border-sky-100 dark:border-sky-500/50 rounded-xl p-3 text-center transition-all">
+                        <span class="text-xs font-semibold text-sky-700 dark:text-sky-300 block mb-1">6:00 AM</span>
+                        <div class="flex justify-center my-1.5">
+                            <i data-lucide="sun-cloud" class="w-7 h-7 text-amber-500 dark:text-amber-400"></i>
+                        </div>
+                        <span class="text-xs font-bold text-slate-900 dark:text-white block">Fair & Scattered</span>
+                        <span class="text-[11px] text-slate-500 dark:text-slate-400">0 mm/h</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Action Shortcuts -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+                <button onclick="switchTab('hazard-map')" class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:border-sky-500 transition-all text-left group">
+                    <i data-lucide="map-pin" class="w-6 h-6 text-sky-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-sm">Interactive Hazard Map</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">View inundated zones</p>
+                </button>
+
+                <button onclick="switchTab('suspensions')" class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:border-amber-500 transition-all text-left group">
+                    <i data-lucide="graduation-cap" class="w-6 h-6 text-amber-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-sm">Class Suspensions</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">LGU announcements</p>
+                </button>
+
+                <button onclick="switchTab('evacuation')" class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:border-emerald-500 transition-all text-left group">
+                    <i data-lucide="building-2" class="w-6 h-6 text-emerald-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-sm">Evacuation Shelters</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">Find nearest shelter</p>
+                </button>
+
+                <button onclick="switchTab('preparedness')" class="p-4 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-xl shadow-sm hover:border-purple-500 transition-all text-left group">
+                    <i data-lucide="briefcase" class="w-6 h-6 text-purple-500 mb-2 group-hover:scale-110 transition-transform"></i>
+                    <h4 class="font-bold text-slate-900 dark:text-white text-sm">Go-Bag Checklist</h4>
+                    <p class="text-xs text-slate-500 dark:text-slate-400">72-Hour emergency prep</p>
+                </button>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 2: HAZARD MAP ==================== -->
+        <div id="tab-hazard-map" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">Bulacan Flood & Hazard Inundation Map</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Select municipality to inspect localized flooding risk and critical water levels.</p>
+                    </div>
+                    <!-- Municipality Switcher -->
+                    <div class="flex items-center gap-2">
+                        <label class="text-xs font-semibold text-slate-600 dark:text-slate-400">Municipality:</label>
+                        <select id="muniSelect" onchange="updateMunicipalityMap(this.value)" class="bg-slate-100 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white text-xs rounded-lg p-2 focus:ring-2 focus:ring-sky-500">
+                            <option value="calumpit">Calumpit (Critical - Severe)</option>
+                            <option value="hagonoy">Hagonoy (High - Coastal/Tidal)</option>
+                            <option value="malolos">Malolos City (Moderate)</option>
+                            <option value="guiguinto">Guiguinto (Moderate)</option>
+                            <option value="balagtas">Balagtas (Low-Moderate)</option>
+                            <option value="bocaue">Bocaue (High Risk Zone)</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Interactive SVG Vector Map Visualizer -->
+                <div class="relative w-full h-96 bg-slate-900 rounded-xl overflow-hidden border border-slate-700 flex items-center justify-center">
+                    <svg viewBox="0 0 800 500" class="w-full h-full object-cover">
+                        <!-- Background Water Body -->
+                        <rect width="800" height="500" fill="#0f172a" />
+                        <!-- River Network Lines -->
+                        <path d="M 50 0 C 150 100, 200 200, 300 250 C 400 300, 500 200, 750 500" stroke="#0284c7" stroke-width="12" fill="none" opacity="0.6" />
+                        <path d="M 300 250 C 350 350, 200 400, 100 500" stroke="#0284c7" stroke-width="8" fill="none" opacity="0.6" />
+
+                        <!-- Municipality SVG Regions -->
+                        <!-- Calumpit Zone -->
+                        <path id="zone-calumpit" d="M 100 80 L 250 90 L 280 220 L 120 200 Z" class="transition-all duration-300 cursor-pointer" fill="#ef4444" fill-opacity="0.4" stroke="#ef4444" stroke-width="2" onclick="selectZone('Calumpit', '4.2m Water Level', 'HIGH - Evacuation Urged')"/>
+                        <text x="160" y="150" fill="#ffffff" font-size="14" font-weight="bold">Calumpit</text>
+
+                        <!-- Hagonoy Zone -->
+                        <path id="zone-hagonoy" d="M 80 210 L 240 225 L 200 380 L 50 350 Z" class="transition-all duration-300 cursor-pointer" fill="#f97316" fill-opacity="0.4" stroke="#f97316" stroke-width="2" onclick="selectZone('Hagonoy', '3.1m Water Level', 'HIGH - Tidal Inundation')"/>
+                        <text x="120" y="300" fill="#ffffff" font-size="14" font-weight="bold">Hagonoy</text>
+
+                        <!-- Malolos Zone -->
+                        <path id="zone-malolos" d="M 260 100 L 450 120 L 420 280 L 250 230 Z" class="transition-all duration-300 cursor-pointer" fill="#eab308" fill-opacity="0.4" stroke="#eab308" stroke-width="2" onclick="selectZone('Malolos', '1.8m Water Level', 'MODERATE - Flooded Roads')"/>
+                        <text x="320" y="190" fill="#ffffff" font-size="14" font-weight="bold">Malolos</text>
+
+                        <!-- Guiguinto Zone -->
+                        <path id="zone-guiguinto" d="M 460 130 L 600 140 L 580 260 L 430 280 Z" class="transition-all duration-300 cursor-pointer" fill="#eab308" fill-opacity="0.3" stroke="#eab308" stroke-width="2" onclick="selectZone('Guiguinto', '1.2m Water Level', 'MODERATE - Passable')"/>
+                        <text x="480" y="200" fill="#ffffff" font-size="14" font-weight="bold">Guiguinto</text>
+
+                        <!-- Balagtas Zone -->
+                        <path id="zone-balagtas" d="M 430 285 L 580 265 L 560 380 L 400 360 Z" class="transition-all duration-300 cursor-pointer" fill="#22c55e" fill-opacity="0.3" stroke="#22c55e" stroke-width="2" onclick="selectZone('Balagtas', '0.4m Water Level', 'LOW - Minor Overflow')"/>
+                        <text x="460" y="330" fill="#ffffff" font-size="14" font-weight="bold">Balagtas</text>
+
+                        <!-- Bocaue Zone -->
+                        <path id="zone-bocaue" d="M 590 265 L 720 280 L 700 420 L 560 385 Z" class="transition-all duration-300 cursor-pointer" fill="#ef4444" fill-opacity="0.35" stroke="#ef4444" stroke-width="2" onclick="selectZone('Bocaue', '2.5m Water Level', 'HIGH - River Spillover')"/>
+                        <text x="610" y="340" fill="#ffffff" font-size="14" font-weight="bold">Bocaue</text>
+                    </svg>
+
+                    <!-- Interactive Map Overlay Info Box -->
+                    <div id="mapInfoCard" class="absolute bottom-4 left-4 right-4 sm:right-auto bg-slate-900/90 backdrop-blur border border-slate-700 text-white p-3.5 rounded-xl max-w-sm shadow-xl">
+                        <h4 id="infoZoneName" class="font-bold text-sky-400 text-sm">Calumpit Hazard Sector</h4>
+                        <p id="infoWaterLevel" class="text-xs text-slate-200 mt-1">Water Depth Level: <span class="text-red-400 font-bold">4.2 Meters</span></p>
+                        <p id="infoStatus" class="text-xs text-slate-300">Status: Severe Inundation Alert</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 3: WEATHER RADAR ==================== -->
+        <div id="tab-weather" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <div class="flex items-center justify-between mb-4">
+                    <h2 class="text-lg font-bold text-slate-900 dark:text-white">PAGASA Live Radar & Atmospheric Telemetry</h2>
+                    <span class="text-xs bg-red-100 text-red-700 dark:bg-red-950 dark:text-red-300 font-bold px-2.5 py-1 rounded-full">LIVE RADAR FEED</span>
+                </div>
+                <div class="relative w-full h-80 bg-slate-950 rounded-xl flex items-center justify-center border border-slate-800 overflow-hidden">
+                    <div class="absolute inset-0 bg-[radial-gradient(#0284c7_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div>
+                    <!-- Animated Radar Sweep visual -->
+                    <div class="w-64 h-64 border border-sky-500/30 rounded-full relative flex items-center justify-center">
+                        <div class="w-44 h-44 border border-sky-500/40 rounded-full flex items-center justify-center">
+                            <div class="w-24 h-24 border border-sky-500/50 rounded-full"></div>
+                        </div>
+                        <div class="absolute w-full h-[1px] bg-sky-500/30"></div>
+                        <div class="absolute h-full w-[1px] bg-sky-500/30"></div>
+                        <!-- Radar Pulse Animation -->
+                        <div class="absolute inset-0 rounded-full bg-gradient-to-tr from-transparent via-sky-500/20 to-transparent animate-spin" style="animation-duration: 4s;"></div>
+                    </div>
+                    <div class="absolute bottom-3 left-3 bg-slate-900/80 px-3 py-1.5 rounded-lg border border-slate-700 text-xs text-sky-300 font-mono">
+                        Radar Sweep Center: Subic/Bulacan Doppler (14.8386° N, 120.8113° E)
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 4: TELEMETRY & ANALYTICS ==================== -->
+        <div id="tab-analytics" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Disaster Telemetry & Water Gauge Level</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Historical water heights recorded across primary Bulacan river systems (Meters above sea level).</p>
+                <div class="w-full h-72">
+                    <canvas id="waterChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 5: CLASS SUSPENSIONS ==================== -->
+        <div id="tab-suspensions" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Official LGU Class & Work Suspensions Board</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div class="p-4 rounded-xl border border-red-200 dark:border-red-900/60 bg-red-50/50 dark:bg-red-950/20 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Calumpit LGU</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300">All Levels (Public & Private) + Gov Work</p>
+                        </div>
+                        <span class="text-xs bg-red-600 text-white px-2.5 py-1 rounded-md font-bold">SUSPENDED</span>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-red-200 dark:border-red-900/60 bg-red-50/50 dark:bg-red-950/20 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Hagonoy LGU</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300">All Levels (Public & Private)</p>
+                        </div>
+                        <span class="text-xs bg-red-600 text-white px-2.5 py-1 rounded-md font-bold">SUSPENDED</span>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-amber-200 dark:border-amber-900/60 bg-amber-50/50 dark:bg-amber-950/20 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Malolos City</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300">Pre-school to High School</p>
+                        </div>
+                        <span class="text-xs bg-amber-500 text-white px-2.5 py-1 rounded-md font-bold">PARTIAL</span>
+                    </div>
+
+                    <div class="p-4 rounded-xl border border-emerald-200 dark:border-emerald-900/60 bg-emerald-50/50 dark:bg-emerald-950/20 flex justify-between items-center">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white text-sm">Meycauayan City</h3>
+                            <p class="text-xs text-slate-600 dark:text-slate-300">Normal Operations Resume</p>
+                        </div>
+                        <span class="text-xs bg-emerald-600 text-white px-2.5 py-1 rounded-md font-bold">CLASSES ON</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 6: GO-BAG CHECKLIST ==================== -->
+        <div id="tab-preparedness" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <div class="flex justify-between items-center mb-4">
+                    <div>
+                        <h2 class="text-lg font-bold text-slate-900 dark:text-white">72-Hour Emergency Go-Bag Progress Tracker</h2>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Ensure your family survival kit is complete before typhoon landfall.</p>
+                    </div>
+                    <div class="text-right">
+                        <span id="bagProgressText" class="text-xl font-extrabold text-sky-600 dark:text-sky-400">0%</span>
+                    </div>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="w-full bg-slate-100 dark:bg-slate-800 h-3 rounded-full overflow-hidden mb-6">
+                    <div id="bagProgressBar" class="bg-sky-500 h-full w-0 transition-all duration-300"></div>
+                </div>
+
+                <!-- Interactive Items Checklist -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm" id="gobagList">
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>Drinking Water (1 Gallon per person/day)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>Non-Perishable Ready-to-Eat Food (3 Days)</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>First Aid Kit & Maintenance Medicines</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>Flashlight with Extra Batteries / Solar Light</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>Power Bank (Fully Charged) & Cables</span>
+                    </label>
+                    <label class="flex items-center gap-3 p-3 border border-slate-200 dark:border-slate-800 rounded-xl cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800/50">
+                        <input type="checkbox" onchange="updateGoBag()" class="w-4 h-4 text-sky-600 rounded">
+                        <span>Important Family Documents in Waterproof Pouch</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 7: EVACUATION CENTERS ==================== -->
+        <div id="tab-evacuation" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Evacuation Shelters Directory</h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div class="border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white">Calumpit Sports Complex Shelter</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Poblacion, Calumpit, Bulacan</p>
+                            <p class="text-xs font-semibold text-emerald-600 dark:text-emerald-400 mt-2">Capacity: 340 / 600 Occupied</p>
+                        </div>
+                        <span class="text-xs bg-emerald-100 text-emerald-700 dark:bg-emerald-950 dark:text-emerald-300 font-bold px-2 py-1 rounded">OPEN</span>
+                    </div>
+
+                    <div class="border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex justify-between items-start">
+                        <div>
+                            <h3 class="font-bold text-slate-900 dark:text-white">Bulacan State University Gym</h3>
+                            <p class="text-xs text-slate-500 dark:text-slate-400 mt-1">Guinhawa, Malolos City</p>
+                            <p class="text-xs font-semibold text-amber-600 dark:text-amber-400 mt-2">Capacity: 890 / 900 Occupied</p>
+                        </div>
+                        <span class="text-xs bg-amber-100 text-amber-700 dark:bg-amber-950 dark:text-amber-300 font-bold px-2 py-1 rounded">NEAR FULL</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 8: RELIEF PARTNERS ==================== -->
+        <div id="tab-ngo" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Verified Humanitarian & Relief NGO Partners</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2">
+                        <h3 class="font-bold text-slate-900 dark:text-white">Philippine Red Cross - Bulacan</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Emergency rescue & hot meals distribution.</p>
+                        <a href="tel:143" class="inline-flex items-center gap-1 text-xs text-sky-600 dark:text-sky-400 font-bold"><i data-lucide="phone" class="w-3.5 h-3.5"></i> Call 143</a>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2">
+                        <h3 class="font-bold text-slate-900 dark:text-white">Angat Buhay Foundation</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Relief pack supply & clean water packs.</p>
+                        <a href="#" class="inline-flex items-center gap-1 text-xs text-sky-600 dark:text-sky-400 font-bold"><i data-lucide="globe" class="w-3.5 h-3.5"></i> Request Aid</a>
+                    </div>
+
+                    <div class="p-4 border border-slate-200 dark:border-slate-800 rounded-xl space-y-2">
+                        <h3 class="font-bold text-slate-900 dark:text-white">Caritas Malolos</h3>
+                        <p class="text-xs text-slate-500 dark:text-slate-400">Parish evacuation & community soup kitchen.</p>
+                        <a href="#" class="inline-flex items-center gap-1 text-xs text-sky-600 dark:text-sky-400 font-bold"><i data-lucide="heart" class="w-3.5 h-3.5"></i> Volunteer</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 9: EMERGENCY HOTLINES ==================== -->
+        <div id="tab-hotlines" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-4">Direct Emergency Dial Directory</h2>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <a href="tel:911" class="p-4 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-800/60 rounded-xl flex justify-between items-center hover:opacity-90 transition-opacity">
+                        <div>
+                            <p class="text-xs text-red-600 dark:text-red-400 font-bold">NATIONAL EMERGENCY</p>
+                            <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">911 Hotline</h3>
+                        </div>
+                        <i data-lucide="phone-call" class="w-6 h-6 text-red-600 dark:text-red-400"></i>
+                    </a>
+
+                    <a href="tel:0447910566" class="p-4 bg-sky-50 dark:bg-sky-950/40 border border-sky-200 dark:border-sky-800/60 rounded-xl flex justify-between items-center hover:opacity-90 transition-opacity">
+                        <div>
+                            <p class="text-xs text-sky-600 dark:text-sky-400 font-bold">BULACAN PDRRMO</p>
+                            <h3 class="text-lg font-extrabold text-slate-900 dark:text-white">(044) 791-0566</h3>
+                        </div>
+                        <i data-lucide="phone-call" class="w-6 h-6 text-sky-600 dark:text-sky-400"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- ==================== TAB 10: CITIZEN FEED ==================== -->
+        <div id="tab-reports" class="tab-content hidden space-y-4">
+            <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl p-5 shadow-sm">
+                <h2 class="text-lg font-bold text-slate-900 dark:text-white mb-2">Citizen Flood Reporting System</h2>
+                <p class="text-xs text-slate-500 dark:text-slate-400 mb-4">Submit real-time ground flood updates from your barangay.</p>
+                
+                <form onsubmit="submitReport(event)" class="space-y-3 mb-6 bg-slate-50 dark:bg-slate-800/50 p-4 rounded-xl border border-slate-200 dark:border-slate-700">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Location / Barangay</label>
+                        <input id="reportLoc" type="text" placeholder="e.g. Brgy. Gatbuca, Calumpit" class="w-full text-xs p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white" required>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1">Situation Description</label>
+                        <textarea id="reportDesc" rows="2" placeholder="Describe water level (e.g. Waist-deep) and immediate needs..." class="w-full text-xs p-2.5 rounded-lg bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 text-slate-900 dark:text-white" required></textarea>
+                    </div>
+                    <button type="submit" class="bg-sky-600 hover:bg-sky-700 text-white font-bold text-xs px-4 py-2.5 rounded-lg transition-colors">Submit Report</button>
+                </form>
+
+                <!-- Moderated Reports Feed -->
+                <div class="space-y-3" id="reportsContainer">
+                    <div class="p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl">
+                        <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
+                            <span class="font-bold text-slate-900 dark:text-white">Brgy. Meysulao, Calumpit</span>
+                            <span>5 mins ago</span>
+                        </div>
+                        <p class="text-xs text-slate-700 dark:text-slate-300">Water rising quickly due to river overflow. Waist-deep on main road. Rescue boats requested.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Portal Footer -->
+    <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 mt-12 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 text-center text-xs text-slate-500 dark:text-slate-400 space-y-2">
+            <p class="font-semibold">BSAFE - Bulacan Safety and Flood Emergency Management System</p>
+            <p>Developed for high-contrast accessibility and real-time community disaster preparedness.</p>
+            <p>&copy; 2026 Province of Bulacan Emergency Response Council. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <!-- JavaScript Functions for Navigation, Dark Mode, and Charts -->
+    <script>
+        // Tab Switcher Logic
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            const target = document.getElementById('tab-' + tabId);
+            if (target) target.classList.remove('hidden');
+
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                btn.classList.remove('text-sky-600', 'dark:text-sky-400', 'bg-sky-50', 'dark:bg-sky-950/50');
+                btn.classList.add('text-slate-600', 'dark:text-slate-300');
+            });
+
+            const activeNav = document.getElementById('nav-' + tabId);
+            if (activeNav) {
+                activeNav.classList.add('text-sky-600', 'dark:text-sky-400', 'bg-sky-50', 'dark:bg-sky-950/50');
+            }
+        }
+
+        // Dark Mode Toggle Logic
+        function toggleDarkMode() {
+            const html = document.documentElement;
+            if (html.classList.contains('dark')) {
+                html.classList.remove('dark');
+            } else {
+                html.classList.add('dark');
+            }
+        }
+
+        // Municipality Map Selection Handler
+        function updateMunicipalityMap(val) {
+            const mapCard = document.getElementById('mapInfoCard');
+            if (val === 'calumpit') selectZone('Calumpit', '4.2m Water Level', 'HIGH - Evacuation Urged');
+            if (val === 'hagonoy') selectZone('Hagonoy', '3.1m Water Level', 'HIGH - Tidal Inundation');
+            if (val === 'malolos') selectZone('Malolos', '1.8m Water Level', 'MODERATE - Flooded Roads');
+            if (val === 'guiguinto') selectZone('Guiguinto', '1.2m Water Level', 'MODERATE - Passable');
+            if (val === 'balagtas') selectZone('Balagtas', '0.4m Water Level', 'LOW - Minor Overflow');
+            if (val === 'bocaue') selectZone('Bocaue', '2.5m Water Level', 'HIGH - River Spillover');
+        }
+
+        function selectZone(name, level, status) {
+            document.getElementById('infoZoneName').innerText = name + ' Hazard Sector';
+            document.getElementById('infoWaterLevel').innerHTML = 'Water Depth Level: <span class="text-red-400 font-bold">' + level + '</span>';
+            document.getElementById('infoStatus').innerText = 'Status: ' + status;
+        }
+
+        // 72-Hour Go-Bag Progress Calculation
+        function updateGoBag() {
+            const checkboxes = document.querySelectorAll('#gobagList input[type="checkbox"]');
+            let checked = 0;
+            checkboxes.forEach(cb => { if (cb.checked) checked++; });
+            const pct = Math.round((checked / checkboxes.length) * 100);
+            document.getElementById('bagProgressText').innerText = pct + '%';
+            document.getElementById('bagProgressBar').style.width = pct + '%';
+        }
+
+        // Citizen Feed Submission Handler
+        function submitReport(e) {
+            e.preventDefault();
+            const loc = document.getElementById('reportLoc').value;
+            const desc = document.getElementById('reportDesc').value;
+            const container = document.getElementById('reportsContainer');
+
+            const card = document.createElement('div');
+            card.className = "p-3.5 border border-slate-200 dark:border-slate-800 rounded-xl bg-sky-50/50 dark:bg-sky-950/20";
+            card.innerHTML = `
+                <div class="flex justify-between text-xs text-slate-500 dark:text-slate-400 mb-1">
+                    <span class="font-bold text-slate-900 dark:text-white">${loc}</span>
+                    <span>Just now</span>
+                </div>
+                <p class="text-xs text-slate-700 dark:text-slate-300">${desc}</p>
+            `;
+            container.prepend(card);
+            document.getElementById('reportLoc').value = '';
+            document.getElementById('reportDesc').value = '';
+        }
+
+        // Initialize Lucide Icons & Telemetry Chart on Window Load
+        window.onload = function() {
+            lucide.createIcons();
+
+            // Initialize Telemetry Chart.js
+            const ctx = document.getElementById('waterChart').getContext('2d');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Calumpit', 'Hagonoy', 'Bocaue', 'Malolos', 'Guiguinto', 'Balagtas'],
+                    datasets: [{
+                        label: 'Water Depth (Meters)',
+                        data: [4.2, 3.1, 2.5, 1.8, 1.2, 0.4],
+                        backgroundColor: [
+                            '#ef4444',
+                            '#f97316',
+                            '#ef4444',
+                            '#eab308',
+                            '#eab308',
+                            '#22c55e'
+                        ],
+                        borderRadius: 6
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            grid: { color: 'rgba(156, 163, 175, 0.1)' }
+                        },
+                        x: {
+                            grid: { display: false }
+                        }
+                    }
+                }
+            });
+        };
+    </script>
+</body>
+</html>
