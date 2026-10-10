@@ -50,13 +50,13 @@
         .map-region:hover path { filter: brightness(1.15); transform: scale(1.01); transform-origin: center; }
         .map-region.active path { stroke: #ffffff; stroke-width: 4px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); }
 
-        /* Animated Water Effect */
+        /* Subtle Ambient Water Wave Motion */
         @keyframes waveMotion {
-            0% { transform: translateX(0); }
-            50% { transform: translateX(-15px); }
-            100% { transform: translateX(0); }
+            0% { transform: translateX(0) translateY(0); }
+            50% { transform: translateX(-20px) translateY(4px); }
+            100% { transform: translateX(0) translateY(0); }
         }
-        .animated-wave { animation: waveMotion 6s ease-in-out infinite; }
+        .animated-wave { animation: waveMotion 8s ease-in-out infinite; }
 
         /* Custom Toast Notification Overlay */
         #toast { transition: all 0.3s ease; }
@@ -87,9 +87,13 @@
     </div>
 
     <!-- MAIN HEADER & NAVIGATION -->
-    <header class="bg-brand-900 dark:bg-slate-900 text-white sticky top-0 z-40 shadow-md border-b border-brand-800 dark:border-slate-800">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-            
+    <header class="bg-brand-900 dark:bg-slate-900 text-white sticky top-0 z-40 shadow-md border-b border-brand-800 dark:border-slate-800 overflow-hidden relative">
+        <!-- Ambient Water Waves in Header Background -->
+        <svg class="absolute inset-0 w-full h-full opacity-10 pointer-events-none animated-wave" preserveAspectRatio="none" viewBox="0 0 1200 120">
+            <path d="M0,0 C150,90 350,-40 500,50 C650,140 900,-20 1200,40 L1200,120 L0,120 Z" fill="#0284c7"></path>
+        </svg>
+
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16 relative z-10">
             <!-- LOGO & TITLE -->
             <div class="flex items-center space-x-3 cursor-pointer group" onclick="switchTab('home')">
                 <div class="bg-brand-500 p-2 rounded-lg text-white font-bold text-xl flex items-center justify-center group-hover:scale-105 transition shadow-md">
@@ -117,14 +121,11 @@
                 <button onclick="switchTab('about')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-about">About Us</button>
             </nav>
 
-            <!-- RIGHT ACTION BUTTONS: DARK MODE & HOTLINES -->
+            <!-- RIGHT ACTION BUTTONS -->
             <div class="flex items-center space-x-2">
-                <!-- Dark Mode Toggle Button -->
                 <button id="theme-toggle" onclick="toggleDarkMode()" class="p-2 rounded-lg bg-brand-800 dark:bg-slate-800 hover:bg-brand-700 dark:hover:bg-slate-700 text-amber-300 dark:text-sky-300 transition focus:outline-none" title="Toggle Light/Dark Mode">
                     <i id="theme-icon" data-lucide="moon" class="w-5 h-5"></i>
                 </button>
-
-                <!-- Emergency Hotline Quick Button -->
                 <button onclick="switchTab('hotlines')" class="bg-red-600 hover:bg-red-700 text-white px-3 py-2 rounded-lg font-bold text-xs sm:text-sm flex items-center gap-1.5 shadow-lg animate-pulse hover:animate-none transition">
                     <i data-lucide="phone-call" class="w-4 h-4"></i>
                     <span class="hidden sm:inline">EMERGENCY HOTLINES</span>
@@ -153,7 +154,6 @@
 
         <!-- 1. HOME / DASHBOARD TAB -->
         <section id="tab-home" class="tab-content active space-y-6">
-
             <!-- EMERGENCY STATUS BANNER -->
             <div class="bg-red-600 dark:bg-red-700 text-white rounded-xl p-5 shadow-lg relative overflow-hidden border-l-8 border-red-900">
                 <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 relative z-10">
@@ -390,7 +390,6 @@
                     </div>
                 </div>
             </div>
-
         </section>
 
         <!-- 2. FLOOD MONITORING & HAZARD MAP TAB -->
@@ -428,7 +427,7 @@
                         <!-- VECTOR OVERLAY MAP VIEW WITH WAVE ANIMATIONS -->
                         <div id="map-view-vector" class="my-auto py-4 flex justify-center items-center overflow-hidden">
                             <svg viewBox="0 0 800 500" class="w-full h-auto max-h-[340px] drop-shadow-xl">
-                                <!-- Animated Water Wave -->
+                                <!-- Animated Water Wave Effect in Coastal Waterway -->
                                 <g class="animated-wave">
                                     <path d="M -50,450 Q 150,420 350,480 T 850,430 L 850,520 L -50,520 Z" fill="#0c4a6e" opacity="0.6"/>
                                 </g>
@@ -664,7 +663,6 @@
                     <span class="text-xs font-mono bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-sky-300 px-2.5 py-1 rounded-md">Live Data Stream</span>
                 </div>
 
-                <!-- KEY METRIC CARDS -->
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
                         <div>
@@ -711,7 +709,6 @@
                     </div>
                 </div>
 
-                <!-- HISTORICAL & CURRENT FLOOD HEIGHT COMPARISON CHART -->
                 <div class="bg-slate-50 dark:bg-slate-800/40 p-5 rounded-xl border border-slate-200 dark:border-slate-800 space-y-4">
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div>
@@ -724,7 +721,6 @@
                         </div>
                     </div>
 
-                    <!-- BAR GRAPH VISUALIZATION -->
                     <div class="space-y-3 pt-2">
                         <div>
                             <div class="flex justify-between text-xs font-bold mb-1">
@@ -788,7 +784,6 @@
                     </div>
                 </div>
 
-                <!-- EVACUATION CAPACITY BREAKDOWN TABLE -->
                 <div class="space-y-3">
                     <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Municipality Evacuation Capacity & Readiness</h3>
                     <div class="overflow-x-auto">
@@ -965,7 +960,6 @@
                     </div>
                 </div>
 
-                <!-- INTERACTIVE GO-BAG PROGRESS BAR -->
                 <div class="bg-slate-50 dark:bg-slate-800/40 border border-slate-200 dark:border-slate-800 rounded-xl p-5 space-y-4">
                     <div class="flex justify-between items-center">
                         <div>
@@ -1114,8 +1108,6 @@
                 </div>
 
                 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                    
-                    <!-- NGO CARD 1 -->
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
@@ -1141,7 +1133,6 @@
                         </div>
                     </div>
 
-                    <!-- NGO CARD 2 -->
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
@@ -1167,7 +1158,6 @@
                         </div>
                     </div>
 
-                    <!-- NGO CARD 3 -->
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
@@ -1192,85 +1182,6 @@
                             </a>
                         </div>
                     </div>
-
-                    <!-- NGO CARD 4 -->
-                    <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 rounded-lg flex items-center justify-center font-bold text-lg">
-                                    <i data-lucide="home" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Gawad Kalinga</h3>
-                                    <span class="text-[10px] text-amber-600 dark:text-amber-400 font-semibold uppercase">Operation Walang Iwanan</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Community building and long-term disaster resilience focusing on rebuilding submerged homes and supporting affected GK villages in Bulacan.
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
-                                <i data-lucide="globe" class="w-3.5 h-3.5"></i> gk108.com
-                            </div>
-                            <a href="https://www.gk108.com" target="_blank" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
-                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Visit GK Network
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- NGO CARD 5 -->
-                    <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center font-bold text-lg">
-                                    <i data-lucide="smile" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">UNICEF Philippines</h3>
-                                    <span class="text-[10px] text-blue-600 dark:text-blue-400 font-semibold uppercase">Child Protection</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Provides emergency sanitation facilities, clean water supplies, and child-friendly safe spaces inside designated evacuation centers.
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
-                                <i data-lucide="globe" class="w-3.5 h-3.5"></i> unicef.org/philippines
-                            </div>
-                            <a href="https://www.unicef.org/philippines/" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
-                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Visit UNICEF Emergency
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- NGO CARD 6 -->
-                    <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 rounded-lg flex items-center justify-center font-bold text-lg">
-                                    <i data-lucide="droplet" class="w-6 h-6"></i>
-                                </div>
-                                <div>
-                                    <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Waves for Water PH</h3>
-                                    <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-semibold uppercase">Clean Water Relief</span>
-                                </div>
-                            </div>
-                            <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed">
-                                Deploys portable water filtration systems to isolated communities in Calumpit and Hagonoy where water mains are contaminated.
-                            </p>
-                        </div>
-                        <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
-                                <i data-lucide="globe" class="w-3.5 h-3.5"></i> wavesforwater.org
-                            </div>
-                            <a href="https://www.wavesforwater.org" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
-                                <i data-lucide="external-link" class="w-3.5 h-3.5"></i> Clean Water Initiative
-                            </a>
-                        </div>
-                    </div>
-
                 </div>
             </div>
         </section>
@@ -1676,7 +1587,6 @@
             const data = muniData[name];
             if (!data) return;
 
-            // Update Map Region SVG Selection Focus
             document.querySelectorAll('.map-region').forEach(r => r.classList.remove('active'));
             const regionElem = document.getElementById('region-' + name);
             if (regionElem) regionElem.classList.add('active');
@@ -1691,7 +1601,6 @@
             document.getElementById('panel-update').innerText = data.update;
             document.getElementById('panel-action').innerText = data.action;
 
-            // Sync Google Maps Frame
             const frame = document.getElementById('gmap-frame');
             frame.src = `https://maps.google.com/maps?q=${data.gmapQuery}&t=&z=13&ie=UTF8&iwloc=&output=embed`;
             
@@ -1699,14 +1608,12 @@
             btn.href = data.gmapDirect;
         }
 
-        // SIMULATED GPS LOCATION
         function locateUser() {
             showToast("GPS Signal acquired: Malolos, Bulacan.");
             toggleMapMode('google');
             selectMunicipality('Malolos');
         }
 
-        // GO-BAG CHECKLIST & PROGRESS BAR COUNTER
         function updateGoBag() {
             const checked = document.querySelectorAll('.gobag-item:checked').length;
             const total = document.querySelectorAll('.gobag-item').length;
@@ -1716,7 +1623,6 @@
             document.getElementById('gobag-bar').style.width = `${pct}%`;
         }
 
-        // SHELTER FILTER
         function filterShelters(type) {
             document.querySelectorAll('.shelter-filter-btn').forEach(b => {
                 b.className = "shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 hover:bg-slate-200 font-medium transition";
@@ -1738,7 +1644,6 @@
             });
         }
 
-        // SUBMIT CITIZEN REPORT
         function submitReport(e) {
             e.preventDefault();
             const muni = document.getElementById('report-muni').value;
