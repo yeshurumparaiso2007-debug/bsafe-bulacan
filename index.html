@@ -97,24 +97,24 @@
                 </div>
                 <div>
                     <div class="font-extrabold text-lg tracking-wider flex items-center gap-1.5">
-                        BSAFE <span class="bg-brand-700 text-brand-100 dark:bg-brand-600 text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-normal">Bulacan</span>
+                        BSAFE <span class="bg-brand-700 text-brand-100 dark:bg-brand-600 dark:text-white text-[10px] font-bold px-1.5 py-0.5 rounded uppercase tracking-normal">Bulacan</span>
                     </div>
-                    <p class="text-[10px] text-brand-100 hidden sm:block">Safety & Flood Emergency Web Portal</p>
+                    <p class="text-[10px] text-brand-100 dark:text-slate-300 hidden sm:block">Safety & Flood Emergency Web Portal</p>
                 </div>
             </div>
 
             <!-- DESKTOP NAVIGATION -->
             <nav class="hidden xl:flex items-center space-x-1 text-xs font-semibold" id="desktop-nav">
                 <button onclick="switchTab('home')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition bg-brand-800 dark:bg-slate-800 text-white" id="nav-home">Home</button>
-                <button onclick="switchTab('map')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-map">Flood Map</button>
-                <button onclick="switchTab('weather')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-weather">Weather</button>
-                <button onclick="switchTab('stats')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-stats">Statistics</button>
-                <button onclick="switchTab('suspensions')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-suspensions">Suspensions</button>
-                <button onclick="switchTab('safety')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-safety">Safety Guides</button>
-                <button onclick="switchTab('evacuation')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-evacuation">Evacuation</button>
-                <button onclick="switchTab('ngos')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-ngos">NGO Partners</button>
-                <button onclick="switchTab('community')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-community">Community</button>
-                <button onclick="switchTab('about')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100" id="nav-about">About Us</button>
+                <button onclick="switchTab('map')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-map">Flood Map</button>
+                <button onclick="switchTab('weather')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-weather">Weather</button>
+                <button onclick="switchTab('stats')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-stats">Statistics</button>
+                <button onclick="switchTab('suspensions')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-suspensions">Suspensions</button>
+                <button onclick="switchTab('safety')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-safety">Safety Guides</button>
+                <button onclick="switchTab('evacuation')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-evacuation">Evacuation</button>
+                <button onclick="switchTab('ngos')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-ngos">NGO Partners</button>
+                <button onclick="switchTab('community')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-community">Community</button>
+                <button onclick="switchTab('about')" class="nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200" id="nav-about">About Us</button>
             </nav>
 
             <!-- RIGHT ACTION BUTTONS: DARK MODE & HOTLINES -->
@@ -135,7 +135,7 @@
     </header>
 
     <!-- MOBILE TOP QUICK BAR -->
-    <div class="xl:hidden bg-brand-800 dark:bg-slate-900 text-brand-50 px-4 py-2 flex items-center justify-between text-xs overflow-x-auto whitespace-nowrap gap-4 border-t border-brand-700 dark:border-slate-800 shadow-inner">
+    <div class="xl:hidden bg-brand-800 dark:bg-slate-900 text-brand-50 dark:text-slate-200 px-4 py-2 flex items-center justify-between text-xs overflow-x-auto whitespace-nowrap gap-4 border-t border-brand-700 dark:border-slate-800 shadow-inner">
         <button onclick="switchTab('home')" class="font-medium hover:underline">Home</button>
         <button onclick="switchTab('map')" class="font-medium hover:underline">Flood Map</button>
         <button onclick="switchTab('weather')" class="font-medium hover:underline">Weather</button>
@@ -163,10 +163,10 @@
                                 <span class="w-2 h-2 rounded-full bg-white animate-ping"></span>
                                 Active Operational Alert • Level 3
                             </span>
-                            <span class="text-xs text-red-100 font-mono">Updated 5m ago</span>
+                            <span class="text-xs text-red-100 dark:text-red-200 font-mono">Updated 5m ago</span>
                         </div>
                         <h1 class="text-2xl sm:text-3xl font-extrabold tracking-tight">CURRENT FLOOD ALERT: HIGH SEVERITY</h1>
-                        <p class="text-red-100 text-sm sm:text-base max-w-2xl">
+                        <p class="text-red-100 dark:text-red-100 text-sm sm:text-base max-w-2xl">
                             High tide combined with localized river discharge has triggered significant flooding in low-lying sectors of <strong>Calumpit</strong> and <strong>Hagonoy</strong>. Moderate water accumulation reported in <strong>Malolos, Guiguinto, Balagtas, and Bocaue</strong>.
                         </p>
                     </div>
@@ -188,7 +188,7 @@
                         <i data-lucide="map" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Flood Map</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Target 6 Municipalities</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Target 6 Municipalities</span>
                 </button>
 
                 <button onclick="switchTab('weather')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center">
@@ -196,7 +196,7 @@
                         <i data-lucide="cloud-rain" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Weather</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Radar & Rainfall</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Radar & Rainfall</span>
                 </button>
 
                 <button onclick="switchTab('stats')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center">
@@ -204,7 +204,7 @@
                         <i data-lucide="bar-chart-3" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Statistics</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Disaster Telemetry</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Disaster Telemetry</span>
                 </button>
 
                 <button onclick="switchTab('hotlines')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center">
@@ -212,7 +212,7 @@
                         <i data-lucide="phone-call" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Hotlines</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">24/7 Dispatch</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">24/7 Dispatch</span>
                 </button>
 
                 <button onclick="switchTab('evacuation')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center">
@@ -220,7 +220,7 @@
                         <i data-lucide="building" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Evacuation</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Shelter Capacities</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Shelter Capacities</span>
                 </button>
 
                 <button onclick="switchTab('ngos')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center">
@@ -228,7 +228,7 @@
                         <i data-lucide="heart-handshake" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">NGO Partners</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Relief & Support</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Relief & Support</span>
                 </button>
 
                 <button onclick="switchTab('suspensions')" class="bg-white dark:bg-slate-900 p-4 rounded-xl border border-slate-200 dark:border-slate-800 hover:border-brand-500 dark:hover:border-brand-500 hover:shadow-md transition text-center group flex flex-col items-center col-span-2 sm:col-span-1">
@@ -236,7 +236,7 @@
                         <i data-lucide="graduation-cap" class="w-6 h-6"></i>
                     </div>
                     <span class="font-bold text-slate-800 dark:text-slate-100 text-xs sm:text-sm">Suspensions</span>
-                    <span class="text-[10px] text-slate-500 dark:text-slate-400">Classes & Work</span>
+                    <span class="text-[10px] text-slate-500 dark:text-slate-300">Classes & Work</span>
                 </button>
             </div>
 
@@ -248,7 +248,7 @@
                             <i data-lucide="activity" class="w-5 h-5 text-brand-600 dark:text-sky-400"></i>
                             Target Municipalities Overview
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Key flood-prone areas monitored live by BSAFE</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Key flood-prone areas monitored live by BSAFE</p>
                     </div>
                     <button onclick="switchTab('map')" class="text-xs text-brand-600 dark:text-sky-400 font-bold hover:underline flex items-center gap-1">
                         Full Map <i data-lucide="arrow-right" class="w-3.5 h-3.5"></i>
@@ -261,7 +261,7 @@
                             <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Calumpit</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.8 - 1.2 m</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Affected: Poblacion, Gatbuca, Meysulao</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Poblacion, Gatbuca, Meysulao</p>
                         </div>
                         <span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 text-[10px] font-bold px-2 py-0.5 rounded">Critical</span>
                     </div>
@@ -271,7 +271,7 @@
                             <span class="text-xs font-bold text-red-600 dark:text-red-400 uppercase tracking-wider">Severe Flooding</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Hagonoy</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.6 - 1.0 m</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Affected: San Jose, Sto. Niño, Mercader</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: San Jose, Sto. Niño, Mercader</p>
                         </div>
                         <span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 text-[10px] font-bold px-2 py-0.5 rounded">Critical</span>
                     </div>
@@ -281,7 +281,7 @@
                             <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Malolos (Capital)</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.2 - 0.5 m</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Affected: Cofradia, Canalate, San Vicente</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Cofradia, Canalate, San Vicente</p>
                         </div>
                         <span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">Warning</span>
                     </div>
@@ -291,7 +291,7 @@
                             <span class="text-xs font-bold text-amber-600 dark:text-amber-400 uppercase tracking-wider">Flooding</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Bocaue</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.3 - 0.6 m</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Affected: Wakas, Igulot, Lolomboy</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Wakas, Igulot, Lolomboy</p>
                         </div>
                         <span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">Warning</span>
                     </div>
@@ -301,7 +301,7 @@
                             <span class="text-xs font-bold text-yellow-600 dark:text-yellow-400 uppercase tracking-wider">Monitor</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Guiguinto</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">0.1 - 0.3 m</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Affected: Santa Cruz, Tabang</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Affected: Santa Cruz, Tabang</p>
                         </div>
                         <span class="bg-yellow-100 dark:bg-yellow-950 text-yellow-800 dark:text-yellow-300 text-[10px] font-bold px-2 py-0.5 rounded">Monitor</span>
                     </div>
@@ -311,7 +311,7 @@
                             <span class="text-xs font-bold text-emerald-600 dark:text-emerald-400 uppercase tracking-wider">Normal</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Balagtas</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 mt-1">Est. Depth: <span class="font-semibold text-slate-800 dark:text-slate-100">Passable</span></p>
-                            <p class="text-[11px] text-slate-500 dark:text-slate-400">Minimal gutter-deep water in low spots</p>
+                            <p class="text-[11px] text-slate-500 dark:text-slate-300">Minimal gutter-deep water in low spots</p>
                         </div>
                         <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-700 dark:text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">Normal</span>
                     </div>
@@ -333,7 +333,7 @@
                         <div class="p-3 bg-red-50 dark:bg-red-950/40 border border-red-200 dark:border-red-900/50 rounded-lg space-y-1">
                             <div class="flex justify-between items-center text-xs">
                                 <span class="font-bold text-red-700 dark:text-red-400">PDRRMO Bulacan Command</span>
-                                <span class="text-slate-500 dark:text-slate-400">10 mins ago</span>
+                                <span class="text-slate-500 dark:text-slate-300">10 mins ago</span>
                             </div>
                             <h4 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Evacuation Advisory: Calumpit & Hagonoy Lowland Barangays</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-300">Residents along Pampanga River tributaries are instructed to execute voluntary relocation due to high tide peak at 5:00 PM.</p>
@@ -342,7 +342,7 @@
                         <div class="p-3 bg-amber-50 dark:bg-amber-950/40 border border-amber-200 dark:border-amber-900/50 rounded-lg space-y-1">
                             <div class="flex justify-between items-center text-xs">
                                 <span class="font-bold text-amber-800 dark:text-amber-400">Bulacan Provincial Gov</span>
-                                <span class="text-slate-500 dark:text-slate-400">1 hour ago</span>
+                                <span class="text-slate-500 dark:text-slate-300">1 hour ago</span>
                             </div>
                             <h4 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Class & Public Work Suspensions Issued</h4>
                             <p class="text-xs text-slate-600 dark:text-slate-300">All academic levels suspended across Calumpit, Hagonoy, Malolos, Bocaue, Guiguinto, and Balagtas.</p>
@@ -370,7 +370,7 @@
                                     <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[9px] font-bold px-1.5 py-0.2 rounded">VERIFIED</span>
                                 </div>
                                 <p class="text-slate-600 dark:text-slate-300">"Water is waist-deep along McArthur highway near the market. Light vehicles strictly not passable."</p>
-                                <p class="text-[10px] text-slate-400">Reported by Resident • 20 mins ago</p>
+                                <p class="text-[10px] text-slate-400 dark:text-slate-300">Reported by Resident • 20 mins ago</p>
                             </div>
                         </div>
 
@@ -384,7 +384,7 @@
                                     <span class="bg-yellow-100 dark:bg-yellow-950 text-yellow-800 dark:text-yellow-300 text-[9px] font-bold px-1.5 py-0.2 rounded">VERIFYING</span>
                                 </div>
                                 <p class="text-slate-600 dark:text-slate-300">"Spillover starting near bypass bridge. Water moving slow towards low residential area."</p>
-                                <p class="text-[10px] text-slate-400">Reported by Resident • 35 mins ago</p>
+                                <p class="text-[10px] text-slate-400 dark:text-slate-300">Reported by Resident • 35 mins ago</p>
                             </div>
                         </div>
                     </div>
@@ -402,7 +402,7 @@
                             <i data-lucide="map" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Bulacan Target Municipalities Hazard Map
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Interactive SVG overlay paired with live Google Maps geographic data</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Interactive SVG overlay paired with live Google Maps geographic data</p>
                     </div>
 
                     <div class="flex flex-wrap items-center gap-2">
@@ -490,7 +490,7 @@
                         </div>
 
                         <div class="bg-slate-800/90 dark:bg-slate-900/90 backdrop-blur p-3 rounded-lg border border-slate-700 flex flex-wrap items-center justify-between text-xs text-white gap-2 mt-2">
-                            <span class="font-bold text-slate-300">Severity Legend:</span>
+                            <span class="font-bold text-slate-300 dark:text-slate-200">Severity Legend:</span>
                             <div class="flex items-center gap-3">
                                 <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-emerald-500"></span> Normal</span>
                                 <span class="flex items-center gap-1"><span class="w-3 h-3 rounded-full bg-amber-500"></span> Monitor</span>
@@ -512,24 +512,24 @@
 
                         <div class="space-y-3 text-xs">
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
-                                <span class="text-slate-500 dark:text-slate-400">Est. Water Depth:</span>
-                                <span id="panel-depth" class="font-bold text-slate-800 dark:text-slate-200">0.8 m – 1.2 m</span>
+                                <span class="text-slate-500 dark:text-slate-300">Est. Water Depth:</span>
+                                <span id="panel-depth" class="font-bold text-slate-800 dark:text-slate-100">0.8 m – 1.2 m</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
-                                <span class="text-slate-500 dark:text-slate-400">Rainfall Condition:</span>
-                                <span id="panel-rainfall" class="font-bold text-slate-800 dark:text-slate-200">Heavy Downpour (32mm/h)</span>
+                                <span class="text-slate-500 dark:text-slate-300">Rainfall Condition:</span>
+                                <span id="panel-rainfall" class="font-bold text-slate-800 dark:text-slate-100">Heavy Downpour (32mm/h)</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
-                                <span class="text-slate-500 dark:text-slate-400">High Tide Status:</span>
+                                <span class="text-slate-500 dark:text-slate-300">High Tide Status:</span>
                                 <span id="panel-tide" class="font-bold text-red-600 dark:text-red-400">Rising (1.4m Peak at 5PM)</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
-                                <span class="text-slate-500 dark:text-slate-400">Evacuation Centers:</span>
+                                <span class="text-slate-500 dark:text-slate-300">Evacuation Centers:</span>
                                 <span id="panel-evac" class="font-bold text-emerald-600 dark:text-emerald-400">4 Active / Open</span>
                             </div>
                             <div class="flex justify-between py-1.5 border-b border-slate-200 dark:border-slate-700">
-                                <span class="text-slate-500 dark:text-slate-400">Last Verified Update:</span>
-                                <span id="panel-update" class="font-mono text-slate-600 dark:text-slate-300">5 mins ago</span>
+                                <span class="text-slate-500 dark:text-slate-300">Last Verified Update:</span>
+                                <span id="panel-update" class="font-mono text-slate-600 dark:text-slate-200">5 mins ago</span>
                             </div>
                         </div>
 
@@ -559,79 +559,79 @@
                             <i data-lucide="cloud-rain" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Bulacan Atmospheric & Weather Conditions
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Real-time radar metrics synced with PAGASA Monitoring</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Real-time radar metrics synced with PAGASA Monitoring</p>
                     </div>
-                    <span class="text-xs text-slate-400 font-mono">Station: Malolos Radar</span>
+                    <span class="text-xs text-slate-400 dark:text-slate-300 font-mono">Station: Malolos Radar</span>
                 </div>
 
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-center hover:shadow-md transition">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 block">Temperature</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-300 block">Temperature</span>
                         <span class="text-2xl font-black text-slate-800 dark:text-slate-100">27°C</span>
-                        <span class="text-[10px] text-slate-400">Feels like 31°C</span>
+                        <span class="text-[10px] text-slate-400 dark:text-slate-300">Feels like 31°C</span>
                     </div>
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-center hover:shadow-md transition">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 block">Precipitation / Rain</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-300 block">Precipitation / Rain</span>
                         <span class="text-2xl font-black text-brand-600 dark:text-sky-400">38 mm/h</span>
-                        <span class="text-[10px] text-red-500 font-bold">Heavy Downpour</span>
+                        <span class="text-[10px] text-red-500 dark:text-red-400 font-bold">Heavy Downpour</span>
                     </div>
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-center hover:shadow-md transition">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 block">Relative Humidity</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-300 block">Relative Humidity</span>
                         <span class="text-2xl font-black text-slate-800 dark:text-slate-100">92%</span>
-                        <span class="text-[10px] text-slate-400">Saturated</span>
+                        <span class="text-[10px] text-slate-400 dark:text-slate-300">Saturated</span>
                     </div>
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 text-center hover:shadow-md transition">
-                        <span class="text-xs text-slate-500 dark:text-slate-400 block">Wind Velocity</span>
+                        <span class="text-xs text-slate-500 dark:text-slate-300 block">Wind Velocity</span>
                         <span class="text-2xl font-black text-slate-800 dark:text-slate-100">28 km/h</span>
-                        <span class="text-[10px] text-slate-400">Gusting to 45 km/h</span>
+                        <span class="text-[10px] text-slate-400 dark:text-slate-300">Gusting to 45 km/h</span>
                     </div>
                 </div>
 
                 <div class="space-y-2">
                     <h3 class="font-bold text-slate-800 dark:text-slate-200 text-sm">24-Hour Precipitation Forecast</h3>
                     <div class="grid grid-cols-4 sm:grid-cols-8 gap-2">
-                        <div class="p-2.5 bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-900 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">NOW</span>
-                            <i data-lucide="cloud-lightning" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-400"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Heavy</span>
+                        <div class="p-2.5 bg-brand-50 dark:bg-sky-950/70 border border-brand-200 dark:border-sky-500/50 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-sky-300 font-medium">NOW</span>
+                            <i data-lucide="cloud-lightning" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-300"></i>
+                            <span class="font-bold text-slate-800 dark:text-white">Heavy</span>
                         </div>
-                        <div class="p-2.5 bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-900 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">6 PM</span>
-                            <i data-lucide="cloud-rain" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-400"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Mod</span>
+                        <div class="p-2.5 bg-brand-50 dark:bg-sky-950/70 border border-brand-200 dark:border-sky-500/50 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-sky-300 font-medium">6 PM</span>
+                            <i data-lucide="cloud-rain" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-300"></i>
+                            <span class="font-bold text-slate-800 dark:text-white">Mod</span>
                         </div>
-                        <div class="p-2.5 bg-brand-50 dark:bg-brand-950/50 border border-brand-200 dark:border-brand-900 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">9 PM</span>
-                            <i data-lucide="cloud-rain" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-400"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Mod</span>
+                        <div class="p-2.5 bg-brand-50 dark:bg-sky-950/70 border border-brand-200 dark:border-sky-500/50 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-sky-300 font-medium">9 PM</span>
+                            <i data-lucide="cloud-rain" class="w-5 h-5 mx-auto my-1 text-brand-600 dark:text-sky-300"></i>
+                            <span class="font-bold text-slate-800 dark:text-white">Mod</span>
                         </div>
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">12 AM</span>
-                            <i data-lucide="cloud" class="w-5 h-5 mx-auto my-1 text-slate-500"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Light</span>
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-slate-300 font-medium">12 AM</span>
+                            <i data-lucide="cloud" class="w-5 h-5 mx-auto my-1 text-slate-500 dark:text-slate-300"></i>
+                            <span class="font-bold text-slate-800 dark:text-slate-100">Light</span>
                         </div>
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">3 AM</span>
-                            <i data-lucide="cloud" class="w-5 h-5 mx-auto my-1 text-slate-500"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Light</span>
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-slate-300 font-medium">3 AM</span>
+                            <i data-lucide="cloud" class="w-5 h-5 mx-auto my-1 text-slate-500 dark:text-slate-300"></i>
+                            <span class="font-bold text-slate-800 dark:text-slate-100">Light</span>
                         </div>
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">6 AM</span>
-                            <i data-lucide="sun-cloud" class="w-5 h-5 mx-auto my-1 text-amber-500"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Cloudy</span>
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-slate-300 font-medium">6 AM</span>
+                            <i data-lucide="sun-cloud" class="w-5 h-5 mx-auto my-1 text-amber-500 dark:text-amber-400"></i>
+                            <span class="font-bold text-slate-800 dark:text-slate-100">Cloudy</span>
                         </div>
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">9 AM</span>
-                            <i data-lucide="sun" class="w-5 h-5 mx-auto my-1 text-amber-500"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Fair</span>
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-slate-300 font-medium">9 AM</span>
+                            <i data-lucide="sun" class="w-5 h-5 mx-auto my-1 text-amber-500 dark:text-amber-400"></i>
+                            <span class="font-bold text-slate-800 dark:text-slate-100">Fair</span>
                         </div>
-                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-lg text-center text-xs">
-                            <span class="block text-slate-500 dark:text-slate-400">12 PM</span>
-                            <i data-lucide="sun" class="w-5 h-5 mx-auto my-1 text-amber-500"></i>
-                            <span class="font-bold text-slate-800 dark:text-slate-200">Fair</span>
+                        <div class="p-2.5 bg-slate-50 dark:bg-slate-800/80 border border-slate-200 dark:border-slate-700 rounded-lg text-center text-xs">
+                            <span class="block text-slate-500 dark:text-slate-300 font-medium">12 PM</span>
+                            <i data-lucide="sun" class="w-5 h-5 mx-auto my-1 text-amber-500 dark:text-amber-400"></i>
+                            <span class="font-bold text-slate-800 dark:text-slate-100">Fair</span>
                         </div>
                     </div>
                 </div>
@@ -641,7 +641,7 @@
                     <div class="p-4 bg-red-50 dark:bg-red-950/40 border-l-4 border-red-600 rounded-r-lg space-y-1">
                         <div class="flex justify-between items-center">
                             <span class="text-xs font-bold text-red-700 dark:text-red-400 uppercase">RED RAINFALL WARNING</span>
-                            <span class="text-[11px] text-slate-500 dark:text-slate-400">Issued 3:30 PM</span>
+                            <span class="text-[11px] text-slate-500 dark:text-slate-300">Issued 3:30 PM</span>
                         </div>
                         <h4 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Torrential Rainfall & High Flash Flood Risk</h4>
                         <p class="text-xs text-slate-700 dark:text-slate-300">Covering Calumpit, Hagonoy, Malolos, Bocaue, Guiguinto, Balagtas. Expected flood escalation in low-lying coastal areas.</p>
@@ -659,7 +659,7 @@
                             <i data-lucide="bar-chart-3" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Bulacan Flood Disaster Telemetry & Analytics
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Real-time aggregated emergency response metrics and historical comparisons</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Real-time aggregated emergency response metrics and historical comparisons</p>
                     </div>
                     <span class="text-xs font-mono bg-brand-50 dark:bg-slate-800 text-brand-700 dark:text-sky-300 px-2.5 py-1 rounded-md">Live Data Stream</span>
                 </div>
@@ -668,9 +668,9 @@
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
                         <div>
-                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Affected Families</span>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-300 block">Affected Families</span>
                             <span class="text-2xl font-black text-slate-900 dark:text-slate-100">18,420</span>
-                            <span class="text-[10px] text-red-500 font-bold block mt-0.5">▲ +12% from yesterday</span>
+                            <span class="text-[10px] text-red-500 dark:text-red-400 font-bold block mt-0.5">▲ +12% from yesterday</span>
                         </div>
                         <div class="w-12 h-12 bg-red-100 dark:bg-red-950/60 text-red-600 dark:text-red-400 rounded-xl flex items-center justify-center">
                             <i data-lucide="users" class="w-6 h-6"></i>
@@ -679,9 +679,9 @@
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
                         <div>
-                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Displaced Persons</span>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-300 block">Displaced Persons</span>
                             <span class="text-2xl font-black text-slate-900 dark:text-slate-100">64,150</span>
-                            <span class="text-[10px] text-amber-500 font-bold block mt-0.5">In shelters & host homes</span>
+                            <span class="text-[10px] text-amber-500 dark:text-amber-400 font-bold block mt-0.5">In shelters & host homes</span>
                         </div>
                         <div class="w-12 h-12 bg-amber-100 dark:bg-amber-950/60 text-amber-600 dark:text-amber-400 rounded-xl flex items-center justify-center">
                             <i data-lucide="home" class="w-6 h-6"></i>
@@ -690,7 +690,7 @@
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
                         <div>
-                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 block">Active Evac Centers</span>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-300 block">Active Evac Centers</span>
                             <span class="text-2xl font-black text-slate-900 dark:text-slate-100">18 / 24</span>
                             <span class="text-[10px] text-emerald-600 dark:text-emerald-400 font-bold block mt-0.5">75% Occupancy Rate</span>
                         </div>
@@ -701,9 +701,9 @@
 
                     <div class="bg-slate-50 dark:bg-slate-800/60 p-4 rounded-xl border border-slate-200 dark:border-slate-800 flex items-center justify-between shadow-sm">
                         <div>
-                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-400 block">24h Rainfall Total</span>
+                            <span class="text-xs font-semibold text-slate-500 dark:text-slate-300 block">24h Rainfall Total</span>
                             <span class="text-2xl font-black text-brand-600 dark:text-sky-400">185 mm</span>
-                            <span class="text-[10px] text-slate-400 block mt-0.5">Heavy threshold: >150mm</span>
+                            <span class="text-[10px] text-slate-400 dark:text-slate-300 block mt-0.5">Heavy threshold: >150mm</span>
                         </div>
                         <div class="w-12 h-12 bg-sky-100 dark:bg-sky-950/60 text-brand-600 dark:text-sky-400 rounded-xl flex items-center justify-center">
                             <i data-lucide="droplets" class="w-6 h-6"></i>
@@ -716,7 +716,7 @@
                     <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2">
                         <div>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">Peak Water Level Comparison by Municipality (Meters)</h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Current levels vs. Critical Hazard Threshold</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-300">Current levels vs. Critical Hazard Threshold</p>
                         </div>
                         <div class="flex items-center gap-4 text-xs">
                             <span class="flex items-center gap-1.5"><span class="w-3 h-3 rounded bg-red-500"></span> Current Water Level</span>
@@ -805,29 +805,29 @@
                             <tbody class="divide-y divide-slate-200 dark:divide-slate-800">
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                     <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Calumpit</td>
-                                    <td class="p-3">6 Centers</td>
-                                    <td class="p-3 font-mono">3,200 Persons</td>
+                                    <td class="p-3 text-slate-700 dark:text-slate-300">6 Centers</td>
+                                    <td class="p-3 font-mono text-slate-700 dark:text-slate-300">3,200 Persons</td>
                                     <td class="p-3 font-mono text-red-600 dark:text-red-400 font-bold">2,750 Persons</td>
                                     <td class="p-3"><span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 px-2 py-0.5 rounded font-bold">85% Critical</span></td>
                                 </tr>
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                     <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Hagonoy</td>
-                                    <td class="p-3">5 Centers</td>
-                                    <td class="p-3 font-mono">2,800 Persons</td>
+                                    <td class="p-3 text-slate-700 dark:text-slate-300">5 Centers</td>
+                                    <td class="p-3 font-mono text-slate-700 dark:text-slate-300">2,800 Persons</td>
                                     <td class="p-3 font-mono text-red-600 dark:text-red-400 font-bold">2,410 Persons</td>
                                     <td class="p-3"><span class="bg-red-100 dark:bg-red-950 text-red-700 dark:text-red-300 px-2 py-0.5 rounded font-bold">86% Critical</span></td>
                                 </tr>
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                     <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Malolos City</td>
-                                    <td class="p-3">4 Centers</td>
-                                    <td class="p-3 font-mono">4,500 Persons</td>
+                                    <td class="p-3 text-slate-700 dark:text-slate-300">4 Centers</td>
+                                    <td class="p-3 font-mono text-slate-700 dark:text-slate-300">4,500 Persons</td>
                                     <td class="p-3 font-mono text-amber-600 dark:text-amber-400 font-bold">1,890 Persons</td>
                                     <td class="p-3"><span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded font-bold">42% Moderate</span></td>
                                 </tr>
                                 <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                     <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Bocaue</td>
-                                    <td class="p-3">3 Centers</td>
-                                    <td class="p-3 font-mono">2,000 Persons</td>
+                                    <td class="p-3 text-slate-700 dark:text-slate-300">3 Centers</td>
+                                    <td class="p-3 font-mono text-slate-700 dark:text-slate-300">2,000 Persons</td>
                                     <td class="p-3 font-mono text-amber-600 dark:text-amber-400 font-bold">1,150 Persons</td>
                                     <td class="p-3"><span class="bg-amber-100 dark:bg-amber-950 text-amber-700 dark:text-amber-300 px-2 py-0.5 rounded font-bold">57% Moderate</span></td>
                                 </tr>
@@ -847,7 +847,7 @@
                             <i data-lucide="graduation-cap" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Class & Work Suspensions Board
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Official local government unit declared suspensions</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Official local government unit declared suspensions</p>
                     </div>
                 </div>
 
@@ -867,43 +867,43 @@
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Calumpit</td>
                                 <td class="p-3 text-red-600 dark:text-red-400 font-bold">All Levels (Public & Private)</td>
                                 <td class="p-3 text-red-600 dark:text-red-400 font-bold">Suspended</td>
-                                <td class="p-3 font-mono">Today / Until Cleared</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #04</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today / Until Cleared</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #04</td>
                             </tr>
                             <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Hagonoy</td>
                                 <td class="p-3 text-red-600 dark:text-red-400 font-bold">All Levels (Public & Private)</td>
                                 <td class="p-3 text-red-600 dark:text-red-400 font-bold">Suspended</td>
-                                <td class="p-3 font-mono">Today / Until Cleared</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #08</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today / Until Cleared</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #08</td>
                             </tr>
                             <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Malolos City</td>
                                 <td class="p-3 text-amber-600 dark:text-amber-400 font-bold">Pre-school to Senior High</td>
                                 <td class="p-3 text-emerald-600 dark:text-emerald-400 font-bold">Operational</td>
-                                <td class="p-3 font-mono">Today</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #12</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #12</td>
                             </tr>
                             <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Bocaue</td>
                                 <td class="p-3 text-red-600 dark:text-red-400 font-bold">All Levels (Public & Private)</td>
                                 <td class="p-3 text-emerald-600 dark:text-emerald-400 font-bold">Operational</td>
-                                <td class="p-3 font-mono">Today</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #03</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #03</td>
                             </tr>
                             <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Guiguinto</td>
                                 <td class="p-3 text-amber-600 dark:text-amber-400 font-bold">Pre-school to High School</td>
                                 <td class="p-3 text-emerald-600 dark:text-emerald-400 font-bold">Operational</td>
-                                <td class="p-3 font-mono">Today</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #05</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #05</td>
                             </tr>
                             <tr class="hover:bg-slate-50 dark:hover:bg-slate-800/40 transition">
                                 <td class="p-3 font-bold text-slate-900 dark:text-slate-100">Balagtas</td>
                                 <td class="p-3 text-slate-600 dark:text-slate-300 font-medium">Pre-school Only</td>
                                 <td class="p-3 text-emerald-600 dark:text-emerald-400 font-bold">Operational</td>
-                                <td class="p-3 font-mono">Today</td>
-                                <td class="p-3 text-slate-500 dark:text-slate-400">LGU Exec Order #02</td>
+                                <td class="p-3 font-mono text-slate-700 dark:text-slate-300">Today</td>
+                                <td class="p-3 text-slate-500 dark:text-slate-300">LGU Exec Order #02</td>
                             </tr>
                         </tbody>
                     </table>
@@ -920,7 +920,7 @@
                             <i data-lucide="shield-check" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Disaster Preparedness & Safety Protocol
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Actionable guidelines before, during, and after flood events</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Actionable guidelines before, during, and after flood events</p>
                     </div>
                 </div>
 
@@ -973,7 +973,7 @@
                                 <i data-lucide="briefcase" class="w-5 h-5 text-brand-600 dark:text-sky-400"></i>
                                 Interactive 72-Hour Emergency Go-Bag Tracker
                             </h3>
-                            <p class="text-xs text-slate-500 dark:text-slate-400">Check items as you pack your household disaster kit</p>
+                            <p class="text-xs text-slate-500 dark:text-slate-300">Check items as you pack your household disaster kit</p>
                         </div>
                         <span id="gobag-count" class="bg-brand-600 dark:bg-brand-500 text-white text-xs font-bold px-3 py-1 rounded-full">0 / 8 Packed</span>
                     </div>
@@ -985,35 +985,35 @@
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Drinking Water (3 Liters/person)</span>
+                            <span class="text-slate-800 dark:text-slate-200">Drinking Water (3 Liters/person)</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Non-perishable Canned Food</span>
+                            <span class="text-slate-800 dark:text-slate-200">Non-perishable Canned Food</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Flashlight & Extra Batteries</span>
+                            <span class="text-slate-800 dark:text-slate-200">Flashlight & Extra Batteries</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Powerbank for Mobile Devices</span>
+                            <span class="text-slate-800 dark:text-slate-200">Powerbank for Mobile Devices</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>First-Aid Medical Kit</span>
+                            <span class="text-slate-800 dark:text-slate-200">First-Aid Medical Kit</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Waterproof Document Container</span>
+                            <span class="text-slate-800 dark:text-slate-200">Waterproof Document Container</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Emergency Whistle & Signal Light</span>
+                            <span class="text-slate-800 dark:text-slate-200">Emergency Whistle & Signal Light</span>
                         </label>
                         <label class="flex items-center space-x-2 p-3 bg-white dark:bg-slate-900 border dark:border-slate-800 rounded-lg cursor-pointer hover:bg-slate-50 dark:hover:bg-slate-800 transition">
                             <input type="checkbox" onchange="updateGoBag()" class="gobag-item rounded text-brand-600 focus:ring-brand-500 w-4 h-4">
-                            <span>Hygiene Kit & Extra Clothes</span>
+                            <span class="text-slate-800 dark:text-slate-200">Hygiene Kit & Extra Clothes</span>
                         </label>
                     </div>
                 </div>
@@ -1029,13 +1029,13 @@
                             <i data-lucide="building" class="w-6 h-6 text-brand-600 dark:text-sky-400"></i>
                             Designated Evacuation Centers Directory
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Real-time shelter capacity and operational status</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Real-time shelter capacity and operational status</p>
                     </div>
                     
                     <div class="flex items-center gap-1.5 text-xs">
                         <button onclick="filterShelters('all')" class="shelter-filter-btn px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold transition" id="filter-all">All</button>
-                        <button onclick="filterShelters('open')" class="shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium transition" id="filter-open">Open</button>
-                        <button onclick="filterShelters('full')" class="shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-medium transition" id="filter-full">Near Capacity</button>
+                        <button onclick="filterShelters('open')" class="shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 font-medium transition" id="filter-open">Open</button>
+                        <button onclick="filterShelters('full')" class="shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 font-medium transition" id="filter-full">Near Capacity</button>
                     </div>
                 </div>
 
@@ -1049,7 +1049,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Calumpit National High School</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">Brgy. Poblacion, Calumpit</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-300">Brgy. Poblacion, Calumpit</p>
                             </div>
                             <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">OPEN</span>
                         </div>
@@ -1066,7 +1066,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm">Hagonoy Covered Court / Gymnasium</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">Brgy. Sto. Niño, Hagonoy</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-300">Brgy. Sto. Niño, Hagonoy</p>
                             </div>
                             <span class="bg-amber-100 dark:bg-amber-950 text-amber-800 dark:text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded">NEAR CAPACITY</span>
                         </div>
@@ -1083,7 +1083,7 @@
                         <div class="flex justify-between items-start">
                             <div>
                                 <h3 class="font-bold text-slate-900 dark:text-slate-100 text-sm">BulSU Activity Center</h3>
-                                <p class="text-xs text-slate-500 dark:text-slate-400">City of Malolos</p>
+                                <p class="text-xs text-slate-500 dark:text-slate-300">City of Malolos</p>
                             </div>
                             <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 text-[10px] font-bold px-2 py-0.5 rounded">OPEN</span>
                         </div>
@@ -1108,7 +1108,7 @@
                             <i data-lucide="heart-handshake" class="w-6 h-6 text-amber-600 dark:text-amber-400"></i>
                             NGO & Disaster Relief Partners Directory
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Non-Governmental Organizations actively assisting flood relief operations in Bulacan</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Non-Governmental Organizations actively assisting flood relief operations in Bulacan</p>
                     </div>
                     <span class="text-xs bg-amber-100 dark:bg-amber-950/80 text-amber-800 dark:text-amber-300 px-2.5 py-1 rounded-md font-bold">Verified Partners</span>
                 </div>
@@ -1119,7 +1119,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-red-100 dark:bg-red-950 text-red-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-red-100 dark:bg-red-950 text-red-600 dark:text-red-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="cross" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1132,7 +1132,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="phone" class="w-3.5 h-3.5"></i> (044) 662-5855
                             </div>
                             <a href="https://redcross.org.ph" target="_blank" class="w-full bg-red-600 hover:bg-red-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1145,7 +1145,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-sky-100 dark:bg-sky-950 text-sky-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-sky-100 dark:bg-sky-950 text-sky-600 dark:text-sky-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="heart" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1158,7 +1158,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="mail" class="w-3.5 h-3.5"></i> relief@angatbuhay.ph
                             </div>
                             <a href="https://www.angatbuhay.ph" target="_blank" class="w-full bg-sky-600 hover:bg-sky-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1171,7 +1171,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-950 text-purple-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-purple-100 dark:bg-purple-950 text-purple-600 dark:text-purple-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="shield" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1184,7 +1184,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="phone" class="w-3.5 h-3.5"></i> (02) 8562-0020
                             </div>
                             <a href="https://caritasmanila.org.ph" target="_blank" class="w-full bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1197,7 +1197,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950 text-amber-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-amber-100 dark:bg-amber-950 text-amber-600 dark:text-amber-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="home" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1210,7 +1210,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="globe" class="w-3.5 h-3.5"></i> gk108.com
                             </div>
                             <a href="https://www.gk108.com" target="_blank" class="w-full bg-amber-600 hover:bg-amber-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1223,7 +1223,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-950 text-blue-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-blue-100 dark:bg-blue-950 text-blue-600 dark:text-blue-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="smile" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1236,7 +1236,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="globe" class="w-3.5 h-3.5"></i> unicef.org/philippines
                             </div>
                             <a href="https://www.unicef.org/philippines/" target="_blank" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1249,7 +1249,7 @@
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 rounded-xl p-5 flex flex-col justify-between hover:shadow-md transition">
                         <div class="space-y-3">
                             <div class="flex items-center gap-3">
-                                <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 rounded-lg flex items-center justify-center font-bold text-lg">
+                                <div class="w-10 h-10 bg-emerald-100 dark:bg-emerald-950 text-emerald-600 dark:text-emerald-400 rounded-lg flex items-center justify-center font-bold text-lg">
                                     <i data-lucide="droplet" class="w-6 h-6"></i>
                                 </div>
                                 <div>
@@ -1262,7 +1262,7 @@
                             </p>
                         </div>
                         <div class="pt-4 border-t border-slate-200 dark:border-slate-700/60 mt-4 space-y-2">
-                            <div class="text-xs text-slate-500 dark:text-slate-400 font-mono flex items-center gap-1.5">
+                            <div class="text-xs text-slate-500 dark:text-slate-300 font-mono flex items-center gap-1.5">
                                 <i data-lucide="globe" class="w-3.5 h-3.5"></i> wavesforwater.org
                             </div>
                             <a href="https://www.wavesforwater.org" target="_blank" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-2 rounded text-xs flex items-center justify-center gap-1.5 transition">
@@ -1281,10 +1281,10 @@
                 <div class="border-b pb-3 border-slate-100 dark:border-slate-800 flex justify-between items-center">
                     <div>
                         <h2 class="text-xl font-bold text-slate-900 dark:text-slate-100 flex items-center gap-2">
-                            <i data-lucide="phone-call" class="w-6 h-6 text-red-600"></i>
+                            <i data-lucide="phone-call" class="w-6 h-6 text-red-600 dark:text-red-400"></i>
                             Bulacan Emergency Response Direct Directory
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Tap phone buttons to place immediate cellular call</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Tap phone buttons to place immediate cellular call</p>
                     </div>
                 </div>
 
@@ -1346,7 +1346,7 @@
 
                     <div class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-800 p-4 rounded-xl flex justify-between items-center hover:shadow-md transition">
                         <div class="space-y-0.5">
-                            <span class="text-[10px] font-bold text-amber-600 uppercase">Bureau of Fire Protection</span>
+                            <span class="text-[10px] font-bold text-amber-600 dark:text-amber-400 uppercase">Bureau of Fire Protection</span>
                             <h3 class="font-bold text-slate-900 dark:text-slate-100 text-base">BFP Bulacan</h3>
                             <p class="text-xs text-slate-600 dark:text-slate-300 font-mono">(044) 796-2222</p>
                         </div>
@@ -1367,13 +1367,13 @@
                             <i data-lucide="send" class="w-5 h-5 text-brand-600 dark:text-sky-400"></i>
                             Submit Citizen Flood Report
                         </h2>
-                        <p class="text-xs text-slate-500 dark:text-slate-400">Help authorities and neighbors by reporting street conditions</p>
+                        <p class="text-xs text-slate-500 dark:text-slate-300">Help authorities and neighbors by reporting street conditions</p>
                     </div>
 
                     <form onsubmit="submitReport(event)" class="space-y-3 text-xs">
                         <div>
-                            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Target Municipality</label>
-                            <select id="report-muni" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-200 focus:ring-brand-500">
+                            <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Target Municipality</label>
+                            <select id="report-muni" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 rounded-lg text-slate-800 dark:text-slate-100 focus:ring-brand-500">
                                 <option value="Calumpit">Calumpit</option>
                                 <option value="Hagonoy">Hagonoy</option>
                                 <option value="Malolos">Malolos</option>
@@ -1384,13 +1384,13 @@
                         </div>
 
                         <div>
-                            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Barangay / Street Location</label>
-                            <input type="text" id="report-brgy" placeholder="e.g. Brgy. Gatbuca near Shell station" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg">
+                            <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Barangay / Street Location</label>
+                            <input type="text" id="report-brgy" placeholder="e.g. Brgy. Gatbuca near Shell station" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg">
                         </div>
 
                         <div>
-                            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Estimated Water Depth</label>
-                            <select id="report-depth" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg">
+                            <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Estimated Water Depth</label>
+                            <select id="report-depth" required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg">
                                 <option value="Ankle deep (0.1m - 0.2m)">Ankle deep (0.1m - 0.2m)</option>
                                 <option value="Knee deep (0.3m - 0.5m)">Knee deep (0.3m - 0.5m)</option>
                                 <option value="Waist deep (0.6m - 1.0m)">Waist deep (0.6m - 1.0m)</option>
@@ -1399,8 +1399,8 @@
                         </div>
 
                         <div>
-                            <label class="block font-bold text-slate-700 dark:text-slate-300 mb-1">Situation Notes</label>
-                            <textarea id="report-notes" rows="3" placeholder="Describe passability, stranded residents, or urgent needs..." required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-200 rounded-lg"></textarea>
+                            <label class="block font-bold text-slate-700 dark:text-slate-200 mb-1">Situation Notes</label>
+                            <textarea id="report-notes" rows="3" placeholder="Describe passability, stranded residents, or urgent needs..." required class="w-full p-2.5 bg-slate-50 dark:bg-slate-800 border border-slate-300 dark:border-slate-700 text-slate-800 dark:text-slate-100 rounded-lg"></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-brand-600 hover:bg-brand-700 text-white font-bold py-2.5 rounded-lg text-xs transition flex items-center justify-center gap-1 shadow active:scale-98">
@@ -1415,7 +1415,7 @@
                             <i data-lucide="message-square" class="w-5 h-5 text-brand-600 dark:text-sky-400"></i>
                             Recent Resident Submissions
                         </h2>
-                        <span class="text-xs text-slate-400">Moderated Feed</span>
+                        <span class="text-xs text-slate-400 dark:text-slate-300">Moderated Feed</span>
                     </div>
 
                     <div id="reports-feed" class="space-y-3">
@@ -1425,7 +1425,7 @@
                                 <span class="bg-emerald-100 dark:bg-emerald-950 text-emerald-800 dark:text-emerald-300 font-bold px-2 py-0.5 rounded text-[9px]">VERIFIED</span>
                             </div>
                             <p class="text-slate-700 dark:text-slate-300">"MacArthur Highway near Bocaue Flyover now knee-deep in floodwater. Low cars advised to detour via NLEX."</p>
-                            <div class="flex justify-between text-[10px] text-slate-400 pt-1">
+                            <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-300 pt-1">
                                 <span>Depth: Knee Deep</span>
                                 <span>12 mins ago</span>
                             </div>
@@ -1437,7 +1437,7 @@
                                 <span class="bg-red-100 dark:bg-red-950 text-red-800 dark:text-red-300 font-bold px-2 py-0.5 rounded text-[9px]">CRITICAL</span>
                             </div>
                             <p class="text-slate-700 dark:text-slate-300">"Water reached waist level inside residential compounds. Power cut off safely by Meralco."</p>
-                            <div class="flex justify-between text-[10px] text-slate-400 pt-1">
+                            <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-300 pt-1">
                                 <span>Depth: Waist Deep</span>
                                 <span>25 mins ago</span>
                             </div>
@@ -1465,7 +1465,7 @@
 
                     <div class="bg-amber-50 dark:bg-amber-950/40 border-l-4 border-amber-500 p-4 rounded-r-lg my-4 space-y-1">
                         <h4 class="font-bold text-amber-900 dark:text-amber-300 text-sm flex items-center gap-1.5">
-                            <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600"></i> Vulnerability Context of Bulacan
+                            <i data-lucide="alert-circle" class="w-4 h-4 text-amber-600 dark:text-amber-400"></i> Vulnerability Context of Bulacan
                         </h4>
                         <p class="text-xs md:text-sm text-amber-800 dark:text-amber-200">
                             Due to low-lying topography, coastal proximity along Manila Bay, riverine spillovers from Angat and Pampanga dams, and astronomical high tides, Bulacan requires continuous hazard monitoring and multi-channel public dissemination.
@@ -1494,14 +1494,14 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t border-slate-800 mt-auto">
+    <footer class="bg-slate-900 text-slate-400 dark:text-slate-300 text-xs py-8 border-t border-slate-800 mt-auto">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
             <div class="flex flex-col md:flex-row justify-between items-center gap-4 border-b border-slate-800 pb-4">
                 <div class="flex items-center space-x-2">
                     <div class="bg-brand-600 text-white p-1.5 rounded font-bold">BSAFE</div>
                     <span class="text-white font-bold">Bulacan Safety & Flood Emergency Web Portal</span>
                 </div>
-                <div class="flex flex-wrap justify-center gap-4 text-slate-400">
+                <div class="flex flex-wrap justify-center gap-4 text-slate-400 dark:text-slate-300">
                     <button onclick="switchTab('about')" class="hover:text-white transition">About Us</button>
                     <button onclick="switchTab('stats')" class="hover:text-white transition">Statistics</button>
                     <button onclick="switchTab('ngos')" class="hover:text-white transition">NGO Partners</button>
@@ -1510,7 +1510,7 @@
                     <button onclick="switchTab('community')" class="hover:text-white transition">Report Flood</button>
                 </div>
             </div>
-            <p class="text-center md:text-left text-[11px] text-slate-500">
+            <p class="text-center md:text-left text-[11px] text-slate-500 dark:text-slate-300">
                 BSAFE Web Portal. Integrated disaster awareness platform serving Hagonoy, Calumpit, Malolos, Guiguinto, Balagtas, and Bocaue.
             </p>
         </div>
@@ -1555,7 +1555,7 @@
 
             // Sync Desktop Nav Highlight
             document.querySelectorAll('#desktop-nav .nav-btn').forEach(btn => {
-                btn.className = "nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100";
+                btn.className = "nav-btn px-2.5 py-2 rounded-md hover:bg-brand-700 dark:hover:bg-slate-800 transition text-brand-100 dark:text-slate-200";
             });
             const activeNav = document.getElementById('nav-' + tabId);
             if (activeNav) {
@@ -1719,7 +1719,7 @@
         // SHELTER FILTER
         function filterShelters(type) {
             document.querySelectorAll('.shelter-filter-btn').forEach(b => {
-                b.className = "shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 hover:bg-slate-200 font-medium transition";
+                b.className = "shelter-filter-btn px-2.5 py-1 rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-200 hover:bg-slate-200 font-medium transition";
             });
 
             document.getElementById('filter-' + type).className = "shelter-filter-btn px-2.5 py-1 rounded-lg bg-brand-600 text-white font-bold transition shadow";
@@ -1755,7 +1755,7 @@
                     <span class="bg-blue-100 dark:bg-blue-950 text-blue-800 dark:text-blue-300 font-bold px-2 py-0.5 rounded text-[9px]">SUBMITTED (VERIFYING)</span>
                 </div>
                 <p class="text-slate-700 dark:text-slate-300">"${notes}"</p>
-                <div class="flex justify-between text-[10px] text-slate-400 pt-1">
+                <div class="flex justify-between text-[10px] text-slate-400 dark:text-slate-300 pt-1">
                     <span>Depth: ${depth}</span>
                     <span>Just Now</span>
                 </div>
